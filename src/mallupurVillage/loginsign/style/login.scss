@@ -1,0 +1,75 @@
+
+
+.login-container {
+    width: 25%;
+    margin: 0 auto;
+    gap: 1rem;
+    padding: 2.5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 5px;
+    background-color:white;
+}
+
+.heading {
+    font-size: 4rem;
+    color: rgb(75, 160, 225);
+}
+
+
+.com1 {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px solid rgb(75, 160, 225);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.com2 {
+    font-size: 1.2rem;
+    margin-left: .3rem;
+    color: rgb(110, 121, 121);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color: rgb(75, 160, 225);
+    color: white;
+    margin-top: 3rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    cursor: pointer;
+}
+
+.form {
+    gap: 1rem;
+    width: 100%;
+}
+
+.forget-pass a {
+    color: rgb(62, 157, 230);
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.user-logo{
+    padding: 1rem 0;
+}
+
+@media(max-width:600px){
+    .htlm{font-size: 10px;}
+}
+
+.error{
+    color: red;
+    margin-top: 5px;
+    margin-left: 3px;
+    letter-spacing: 1px;
+}

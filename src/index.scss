@@ -1,0 +1,36 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background-image: url("wp6366597.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.jc {
+    justify-content: center;
+}
+
+.align {
+    align-items: center;
+}
+
+.height{
+    height: 100vh;
+}
+.sb{
+    justify-content: space-between;
+}
