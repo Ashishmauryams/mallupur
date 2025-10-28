@@ -5,6 +5,7 @@ import ForgotPassword from "./ForgotPassword";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Loading from "../loader/Loading";
 
 function Login() {
     const [userLogin, setUserLogin] = useState({ name: "", password: "" });
@@ -77,7 +78,7 @@ function Login() {
     const showBtn = () => show ? setShow(false) : setShow(true);
 
 
-    if (loading) return <p>Loading...</p>;
+    if(loading) return <p>{<Loading/>}</p>;
     if (error) return <p>{error}</p>;
 
     return (<>
