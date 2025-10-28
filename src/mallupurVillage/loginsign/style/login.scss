@@ -8,11 +8,13 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     border-radius: 5px;
     background-color:white;
+    min-height: 554px;
 }
 
 .heading {
     font-size: 4rem;
     color: rgb(75, 160, 225);
+    white-space: nowrap;
 }
 
 
@@ -41,7 +43,7 @@
     font-weight: 600;
     background-color: rgb(75, 160, 225);
     color: white;
-    margin-top: 3rem;
+    margin-top: 1rem;
     border: none;
     border-radius: 5px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -53,15 +55,15 @@
     width: 100%;
 }
 
-.forget-pass a {
+.forget-pass  {
     color: rgb(62, 157, 230);
     margin-top: 1rem;
     display: inline-block;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-.user-logo{
-    padding: 1rem 0;
-}
+
 
 @media(max-width:600px){
     .htlm{font-size: 10px;}
