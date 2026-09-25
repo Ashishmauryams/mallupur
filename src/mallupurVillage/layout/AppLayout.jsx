@@ -5,7 +5,7 @@ import AppHeader from "./AppHeader";
 function AppLayout(){
     return (<>
     <AppHeader/>
-    <Outlet/>
+    <div><Outlet/></div>
     <AppFooter/>
     </>)
 }

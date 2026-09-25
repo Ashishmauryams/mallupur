@@ -1,171 +1,230 @@
-import { useState } from "react";
-import axios from "axios";
-import './style/login.scss';
-import useValidation from "./useValidation";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-function Register() {
-    const [register, setRegister] = useState({
+
+import { useState } from "react";
+import "./style/register.scss";
+import Input from "../reuseableCopmonent/Input";
+import useValidation from "./useValidation";
+import { registerUser } from "../../api/apiService";
+import Loading from "../loader/Loading";
+import { useNavigate } from "react-router";
+import { useAlert } from "../../contextApi/AlertContext";
+
+const validationRules = {
+    fullName: {
+        required: true,
+        requiredMessage: "Full name is required",
+
+        minLength: 5,
+        minLengthMessage:
+            "Name must be at least 5 characters",
+
+        pattern: /^[A-Za-z]+(?: [A-Za-z]+)*$/,
+        patternMessage:
+            "Name should contain only letters",
+    },
+
+    username: {
+        required: true,
+        requiredMessage: "Username is required",
+
+        minLength: 5,
+        minLengthMessage:
+            "Username must be at least 5 characters",
+
+        pattern: /^[A-Za-z0-9_]+$/,
+        patternMessage:
+            "Username can contain letters, numbers and underscore",
+    },
+
+    email: {
+        required: true,
+        requiredMessage: "Email is required",
+
+        pattern:
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+
+        patternMessage:
+            "Please enter a valid email",
+    },
+
+    phone: {
+        required: true,
+        requiredMessage: "Phone number is required",
+
+        pattern: /^[6-9]\d{9}$/,
+
+        patternMessage:
+            "Enter a valid 10 digit phone number",
+    },
+
+    password: {
+        required: true,
+        requiredMessage: "Password is required",
+
+        minLength: 6,
+        minLengthMessage:
+            "Password must be at least 6 characters",
+
+        pattern:
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]+$/,
+
+        patternMessage:
+            "Password must contain a number and special character",
+    },
+
+    //   confirmPassword: {
+    //     required: true,
+    //     requiredMessage: "Confirm password is required",
+
+    //     validate: (value, formData) => {
+    //       if (value !== formData.password) {
+    //         return "Passwords do not match";
+    //       }
+
+    //       return "";
+    //     },
+    //   },
+};
+const Register = ({ toggleFn, setToggle }) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState({});
+    const [loading, setLoading] = useState(false);
+
+
+    const { showAlert } = useAlert();
+    const [formData, setFormData] = useState({
         fullName: "",
         username: "",
         email: "",
-        phone: "",
         password: "",
+        phone: ""
     });
+    const validation = useValidation(formData, validationRules);
 
-    const [registerErr, setRegisterErr] = useState({});
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const validation = useValidation(register);
     const navigate = useNavigate();
 
-    // 👇 Backend URL (Signup API)
-    const url_sign = "http://localhost:8081/api/v1/admin/create";
 
-    const handleRegister = (e) => {
-        setRegister({ ...register, [e.target.name]: e.target.value });
-        setRegisterErr(validation());
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const validForm = validation();
-        setRegisterErr(validForm);
 
-        if (Object.keys(validForm).length === 0) {
+        const validationError = validation();
+        setError(validationError);
+
+        if (Object.keys(validationError).length > 0) {
+            return;
+        }
+
+        try {
             setLoading(true)
-            try {
-                // 👉 Send data to backend
-                const response = await axios.post(url_sign, {
-                    fullName: register.fullName,
-                    username: register.username,
-                    password: register.password,
-                    phone: register.phone,
-                    email: register.email,
+            const resp = await registerUser(formData);
+            if (resp.status === 201) {
+                showAlert({
+                    message: "Account creted successfully!",
+                    duration: 3000,
+                    severity: "success",
+                    variant: "filled",
                 });
-
-                console.log("✅ Backend Response:", response.data);
-                toast.success("Registration Successful!", { autoClose: 2000 });
-
-                // Reset form
-                setRegister({
-                    fullName: "",
-                    username: "",
-                    email: "",
-                    phone: "",
-                    password: "",
-                });
-
-                // Navigate to login after 2 sec
-                setTimeout(() => navigate("/login"), 2000);
-            } catch (err) {
-                setError(err.message);
-                console.error("❌ Error registering:", err);
-                toast.error(
-                    err.response?.data?.message || "Registration failed! Please try again.",
-                    { autoClose: 3000 }
-                );
-            } finally {
-                setLoading(false);
+                setToggle(false);
             }
+
+
+        } catch (err) {
+            showAlert({
+                message: err?.response?.data || "something went wrong",
+                duration: 3000,
+                severity: "error",
+                variant: "filled",
+            });
+        } finally {
+            setLoading(false);
         }
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
-
-
-
     return (
-        <>
-            <ToastContainer />
-            <div className="flex jc align" style={{ height: "100vh" }}>
-                <div className="login-container flex column jc align">
-                    <div className="user-logo">
-                        <img width="100px" height="100px" src="/OIP.jpeg" alt="user" />
-                    </div>
-                    <h2 className="heading">Register</h2>
-                    <form className="form flex column" onSubmit={handleSubmit}>
-                        <div className="login-subcontainer1">
-                            <label className="label-email com2" htmlFor="fullName">Full Name</label>
-                            <input
-                                className="input-email com1"
-                                type="text"
-                                id="fullName"
+        <div className="register-page">
+
+            <div className="register-container">
+
+                <div className="register-box">
+
+                    <div className="register-content">
+
+                        <div className="logo">
+                            <span>V</span>
+                        </div>
+
+                        <h1>Create Account</h1>
+
+                        <p className="subtitle">
+                            Create your account to get started
+                        </p>
+
+                        <form onSubmit={handleSubmit}>
+                            <Input
                                 name="fullName"
-                                value={register.fullName}
-                                onChange={handleRegister}
-                                placeholder="Full Name"
+                                placeholder="Enter your full name"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                error={error.fullName}
                             />
-                            <p className="error">{registerErr.fullName}</p>
-                        </div>
-
-                        <div className="login-subcontainer1">
-                            <label className="label-email com2" htmlFor="username">Username</label>
-                            <input
-                                className="input-email com1"
-                                type="text"
-                                id="username"
-                                name="username"
-                                value={register.username}
-                                onChange={handleRegister}
-                                placeholder="Username"
-                            />
-                            <p className="error">{registerErr.username}</p>
-                        </div>
-
-                        <div className="login-subcontainer1">
-                            <label className="label-email com2" htmlFor="email">Email</label>
-                            <input
-                                className="input-email com1"
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={register.email}
-                                onChange={handleRegister}
-                                placeholder="Email"
-                            />
-                            <p className="error">{registerErr.email}</p>
-                        </div>
-
-                        <div className="login-subcontainer1">
-                            <label className="label-email com2" htmlFor="phone">Phone</label>
-                            <input
-                                className="input-email com1"
-                                type="text"
-                                id="phone"
+                            <Input
                                 name="phone"
-                                value={register.phone}
-                                onChange={handleRegister}
-                                placeholder="Phone"
+                                placeholder="Enter your phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                error={error.phone}
                             />
-                            <p className="error">{registerErr.phone}</p>
-                        </div>
-
-                        <div className="login-subcontainer2">
-                            <label className="label-pass com2" htmlFor="password">Password</label>
-                            <input
-                                className="input-pass com1"
-                                type="password"
-                                id="password"
+                            <Input
+                                name="username"
+                                placeholder="Enter your user name"
+                                value={formData.username}
+                                onChange={handleChange}
+                                error={error.username}
+                            />
+                            <Input
+                                name="email"
+                                placeholder="Enter your email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                error={error.email}
+                            />
+                            <Input
                                 name="password"
-                                value={register.password}
-                                onChange={handleRegister}
-                                placeholder="Password"
+                                placeholder="Create a  password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                error={error.password}
                             />
-                            <p className="error">{registerErr.password}</p>
-                        </div>
+                            <button
+                                type="submit"
+                                className="register-btn"
+                            >
+                                {loading ? <Loading /> : "Create Account"}
+                            </button>
 
-                        <button className="login-btn" type="submit">
-                            Register
-                        </button>
-                    </form>
+                        </form>
+
+                        <p className="login-text">
+                            Already have an account?
+                            <a onClick={toggleFn}> Login</a>
+                        </p>
+
+                    </div>
+
                 </div>
             </div>
-        </>
+
+        </div>
     );
-}
+};
 
 export default Register;

@@ -1,0 +1,186 @@
+.complaint-page {
+    min-height: calc(100vh - 140px);
+    padding: 50px 20px 60px;
+    background: #f7f9fc;
+
+    .complaint-container {
+        width: 100%;
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    .complaint-header {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+
+        .complaint-badge {
+            display: inline-block;
+            padding: 7px 15px;
+            margin-bottom: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            color: #2563eb;
+            background: #eff6ff;
+            border-radius: 30px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+
+            font-size: 24px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6b7280;
+        }
+    }
+
+
+    .complaint-card_2 {
+        padding: 35px;
+        background: #ffffff;
+
+        border: 1px solid #e8ebf0;
+        border-radius: 16px;
+
+        box-shadow: 0 10px 35px rgba(20, 30, 50, 0.06);
+
+        form {
+            width: 100%;
+        }
+    }
+
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 23px;
+    }
+
+
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+
+
+    .submit-btn {
+        width: 100%;
+        height: 50px;
+
+        margin-top: 5px;
+
+        border: none;
+        border-radius: 9px;
+
+        background: #2563eb;
+        color: #ffffff;
+
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            background: #1d4ed8;
+            box-shadow: 0 7px 18px rgba(37, 99, 235, 0.22);
+        }
+
+        &:active {
+            transform: translateY(1px);
+        }
+
+        &:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+    }
+
+
+
+    .form-note {
+        margin: 18px 0 0;
+
+        text-align: center;
+
+        font-size: 13px;
+        line-height: 1.5;
+        color: #8a93a3;
+    }
+
+
+    @media (max-width: 700px) {
+        .complaint-page {
+            padding: 35px 15px 45px;
+        }
+
+        .complaint-header {
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+
+        .complaint-card_2 {
+            padding: 25px 20px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .complaint-page {
+            padding: 25px 12px 35px;
+        }
+
+        .complaint-header {
+            margin-bottom: 25px;
+
+            h1 {
+                font-size: 25px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+        }
+
+        .complaint-card_2 {
+            padding: 22px 16px;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .submit-btn {
+            height: 48px;
+        }
+    }
+}

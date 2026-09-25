@@ -1,9 +1,12 @@
 import './loading.scss';
 
-function Loading(){
+function Loading({ borderColor = "#FFF", position = "center", }) {
     return (
-        <span class="loader"></span>
-    )
-};
+        <div
+            className={`loading loading-${position}`}
+            style={{ "--loader-border-color": borderColor, }} >
+            <span className="loader"></span>
+        </div>);
+}
 
 export default Loading;

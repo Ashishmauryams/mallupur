@@ -1,0 +1,197 @@
+.dashboard {
+    padding: 24px;
+    background: #f7f8fc;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.dashboard-title {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #1f2937;
+}
+
+.dashboard-subtitle {
+    margin-top: 5px !important;
+    color: #6b7280;
+}
+
+.dashboard-date {
+    color: #6b7280;
+    font-size: 14px !important;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stats-grid {
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.stat-card .MuiCardContent-root {
+    padding: 20px !important;
+}
+
+.stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+}
+
+.stat-icon svg {
+    font-size: 23px;
+}
+
+.stat-growth {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #16a34a;
+}
+
+.stat-growth.warning {
+    color: #d97706;
+}
+
+.stat-value {
+    margin-top: 17px !important;
+    font-size: 27px !important;
+    font-weight: 700 !important;
+    color: #111827;
+}
+
+.stat-label {
+    margin-top: 3px !important;
+    color: #6b7280;
+    font-size: 13px !important;
+}
+
+
+/* =========================
+   CHARTS
+========================= */
+
+.charts-grid {
+    margin-bottom: 20px;
+}
+
+.chart-card,
+.table-card {
+    height: 100%;
+    border-radius: 14px !important;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.chart-card .MuiCardContent-root,
+.table-card .MuiCardContent-root {
+    padding: 20px !important;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chart-title {
+    font-size: 17px !important;
+    font-weight: 650 !important;
+    color: #1f2937;
+}
+
+.chart-subtitle {
+    margin-top: 4px !important;
+    color: #6b7280;
+    font-size: 12px !important;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card {
+    margin-bottom: 20px;
+}
+
+.table-header {
+    margin-bottom: 15px;
+}
+
+.MuiTableHead-root .MuiTableCell-root {
+    font-weight: 600;
+    color: #4b5563;
+    background: #f9fafb;
+}
+
+.MuiTableBody-root .MuiTableCell-root {
+    color: #374151;
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .dashboard {
+        padding: 15px;
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dashboard-title {
+        font-size: 24px !important;
+    }
+
+    .dashboard-date {
+        font-size: 12px !important;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .dashboard {
+        padding: 10px;
+    }
+
+    .stat-value {
+        font-size: 23px !important;
+    }
+
+    .chart-card .MuiCardContent-root,
+    .table-card .MuiCardContent-root {
+        padding: 12px !important;
+    }
+}

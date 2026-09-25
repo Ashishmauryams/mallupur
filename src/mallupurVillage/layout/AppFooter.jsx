@@ -1,6 +1,8 @@
+import Footer from "../footer/Footer";
+
 function AppFooter(){
     return (<>
-    <h1>Footer</h1>
+    <Footer/>
     </>)
 }
 export default AppFooter;
