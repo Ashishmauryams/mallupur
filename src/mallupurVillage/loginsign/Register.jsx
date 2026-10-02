@@ -5,9 +5,11 @@ import "./style/register.scss";
 import Input from "../reuseableCopmonent/Input";
 import useValidation from "./useValidation";
 import { registerUser } from "../../api/apiService";
-import Loading from "../loader/Loading";
 import { useNavigate } from "react-router";
 import { useAlert } from "../../contextApi/AlertContext";
+import Button from "../reuseableCopmonent/Button/Button";
+import Loader from "../reuseableCopmonent/loader/Loader";
+import { CircleUser, Lock, Mail, Phone, User } from "lucide-react";
 
 const validationRules = {
     fullName: {
@@ -86,7 +88,6 @@ const validationRules = {
     //   },
 };
 const Register = ({ toggleFn, setToggle }) => {
-    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -101,8 +102,6 @@ const Register = ({ toggleFn, setToggle }) => {
     });
     const validation = useValidation(formData, validationRules);
 
-    const navigate = useNavigate();
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -110,6 +109,11 @@ const Register = ({ toggleFn, setToggle }) => {
         setFormData((prev) => ({
             ...prev,
             [name]: value,
+        }));
+
+        setError((prev) => ({
+            ...prev,
+            [name]: "",
         }));
     };
 
@@ -154,73 +158,75 @@ const Register = ({ toggleFn, setToggle }) => {
 
             <div className="register-container">
 
-                <div className="register-box">
+                <div className="register-content">
+                    <h1>Create Account</h1>
 
-                    <div className="register-content">
-
-                        <div className="logo">
-                            <span>V</span>
-                        </div>
-
-                        <h1>Create Account</h1>
-
-                        <p className="subtitle">
-                            Create your account to get started
-                        </p>
-
-                        <form onSubmit={handleSubmit}>
-                            <Input
-                                name="fullName"
-                                placeholder="Enter your full name"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                error={error.fullName}
-                            />
-                            <Input
-                                name="phone"
-                                placeholder="Enter your phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                error={error.phone}
-                            />
-                            <Input
-                                name="username"
-                                placeholder="Enter your user name"
-                                value={formData.username}
-                                onChange={handleChange}
-                                error={error.username}
-                            />
-                            <Input
-                                name="email"
-                                placeholder="Enter your email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                error={error.email}
-                            />
-                            <Input
-                                name="password"
-                                placeholder="Create a  password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                error={error.password}
-                            />
-                            <button
-                                type="submit"
-                                className="register-btn"
-                            >
-                                {loading ? <Loading /> : "Create Account"}
-                            </button>
-
-                        </form>
-
-                        <p className="login-text">
-                            Already have an account?
-                            <a onClick={toggleFn}> Login</a>
-                        </p>
-
-                    </div>
-
+                    <p className="subtitle">
+                        Create your account to get started
+                    </p>
                 </div>
+
+                <form onSubmit={handleSubmit}>
+                    <Input
+                        label="Fullname"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        error={error.fullName}
+                        leftIcon={<User size={21} />}
+                    />
+                    <Input
+                        label="Phone"
+                        name="phone"
+                        placeholder="Enter your phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        error={error.phone}
+                        leftIcon={<Phone size={21} />}
+                    />
+                    <Input
+                        label="Username"
+                        name="username"
+                        placeholder="Enter your user name"
+                        value={formData.username}
+                        onChange={handleChange}
+                        error={error.username}
+                        leftIcon={<CircleUser size={21} />}
+                    />
+                    <Input
+                        label="Email"
+                        name="email"
+                        placeholder="Enter your email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        error={error.email}
+                        leftIcon={<Mail size={21} />}
+                    />
+                    <Input
+                        label="Password"
+                        name="password"
+                        placeholder="Create a  password"
+                        type="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        error={error.password}
+                        leftIcon={<Lock size={21} />}
+                    />
+
+                    <Button
+                        text="Create Account"
+                        type="submit"
+                        loading={loading}
+                        loadingElement={<Loader size={22} color="white" />}
+                    />
+
+                </form>
+
+                <p className="login-text">
+                    Already have an account?
+                    <a onClick={toggleFn}> Login</a>
+                </p>
             </div>
 
         </div>

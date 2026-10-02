@@ -143,10 +143,10 @@
 
   padding: 27px;
 
-  border: 1px solid #e8edf3;
+  border: 1px solid var(--button-border);
   border-radius: 16px;
 
-  background: #ffffff;
+  background: var(--bg-primary);
 
   transition: 0.3s ease;
 }
@@ -169,8 +169,8 @@
 
   border-radius: 13px;
 
-  background: #eef6ff;
-  color: #1677ff;
+  background: var(--primary-light);
+  color: var(--primary);
 
   font-size: 23px;
 }
@@ -184,7 +184,7 @@
 .info-card p {
   margin: 0 0 8px;
 
-  color: #7a8494;
+  color: var(--text-secondary);
   font-size: 13px;
 }
 

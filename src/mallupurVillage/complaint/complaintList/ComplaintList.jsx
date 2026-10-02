@@ -89,7 +89,7 @@ const ComplaintList = () => {
 
     return (
         <div className="complaint-list-page">
-            <div className="complaint-list-container">
+            <div className="container">
 
                 {/* PAGE HEADER */}
                 <div style={{ justifySelf: "end", marginBottom: "30px" }}>

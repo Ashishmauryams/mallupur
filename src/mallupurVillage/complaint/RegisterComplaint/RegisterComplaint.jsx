@@ -11,6 +11,8 @@ import { useAlert } from "../../../contextApi/AlertContext.jsx";
 import Loading from "../../loader/Loading.jsx";
 import { useNavigate } from "react-router";
 import BackButton from "../../reuseableCopmonent/BackButton/BackButton.jsx";
+import Button from "../../reuseableCopmonent/Button/Button.jsx";
+import Loader from "../../reuseableCopmonent/loader/Loader.jsx";
 const validationRules = {
     title: {
         required: true,
@@ -66,6 +68,11 @@ const RegisterComplaint = () => {
             ...prev,
             [name]: value,
         }));
+
+        setError((prev) => ({
+            ...prev,
+            [name]: "",
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -112,7 +119,7 @@ const RegisterComplaint = () => {
 
     return (
         <section className="complaint-page">
-            <div className="complaint-container">
+            <div className="container">
 
                 <div className="complaint-header">
                     <div>
@@ -192,14 +199,12 @@ const RegisterComplaint = () => {
 
                         />
 
-                        {/* Submit */}
-                        <button
+                        <Button
+                            text="Register Complaint"
                             type="submit"
-                            className="submit-btn"
-                            disabled={loading}
-                        >
-                            {loading ? <Loading /> : "Register Complaint"}
-                        </button>
+                            loading={loading}
+                            loadingElement={<Loader size={22} color="white" />}
+                        />
 
                     </form>
                 </div>

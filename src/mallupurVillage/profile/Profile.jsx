@@ -51,13 +51,10 @@ const Profile = () => {
             {loading ? (<Loading borderColor="#000" />) :
                 error ? (<ErrorMessage />) :
                     user ?
-                        (<div className="profile-page__container">
+                        (<div className="container">
 
                             <div className="profile-page__header">
                                 <div>
-                                    <span className="profile-page__subtitle">
-                                        My Account
-                                    </span>
 
                                     <h1 className="profile-page__title">
                                         My Profile

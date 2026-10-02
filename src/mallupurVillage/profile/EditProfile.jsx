@@ -129,7 +129,7 @@ const EditProfile = () => {
 
         <div className="edit-profile-page">
 
-            <div className="edit-profile-page__container">
+            <div className="container">
 
                 <div className="edit-profile-page__header">
                     <div>

@@ -11,14 +11,6 @@
   box-sizing: border-box;
 
 
-  &__container {
-
-    width: 100%;
-    max-width: 1000px;
-
-    margin: 0 auto;
-  }
-
   &__header {
 
     display: flex;
@@ -40,7 +32,7 @@
     font-size: 14px;
     font-weight: 600;
 
-    color: #2563eb;
+    color: var(--primary);
   }
 
 
@@ -71,10 +63,10 @@
 
     overflow: hidden;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--button-border);
     border-radius: 16px;
 
-    background: #ffffff;
+    background: var(--bg-primary);
 
     box-shadow:
       0 8px 25px rgba(15, 23, 42, 0.05);
@@ -92,7 +84,7 @@
 
     padding: 30px;
 
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: var(--boxBorder-color);
 
     box-sizing: border-box;
   }
@@ -144,9 +136,9 @@
 
     border-radius: 50%;
 
-    background: #2563eb;
+    background: var(--primary-soft);
 
-    color: #ffffff;
+    color: var(--primary);
 
     cursor: pointer;
 
@@ -156,7 +148,7 @@
 
   &__camera-btn:hover {
 
-    background: #1d4ed8;
+    background: var(--primary-light);
 
     transform: scale(1.05);
   }
@@ -200,7 +192,7 @@
     font-size: 13px;
     font-weight: 600;
 
-    color: #2563eb;
+    color: var(--primary);
 
     cursor: pointer;
 
@@ -210,7 +202,7 @@
 
   &__change-photo:hover {
 
-    color: #1d4ed8;
+    color: var(--primary-hover);
   }
 
 
@@ -291,40 +283,29 @@
 
   &__cancel-btn {
 
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--button-border);
 
-    background: #ffffff;
-
-    color: #374151;
+    background: var(--button-text);
+    color: var(--primary);
   }
 
 
   &__cancel-btn:hover {
-
-    border-color: #9ca3af;
-
-    background: #f9fafb;
+    background: var(--primary-light);
+    box-shadow: var(--button-shadow);
   }
 
   &__save-btn {
 
-    border: 1px solid #2563eb;
-
-    background: #2563eb;
-
-    color: #ffffff;
+    border: 1px solid var(--button-border);
+    background: var(--button-bg);
+    color: var(--button-text);
   }
 
 
   &__save-btn:hover {
-
-    border-color: #1d4ed8;
-
-    background: #1d4ed8;
-
-    box-shadow:
-      0 6px 15px rgba(37, 99, 235, 0.2);
-
+    background: var(--button-hover);
+    box-shadow: var(--button-shadow);
     transform: translateY(-1px);
   }
 

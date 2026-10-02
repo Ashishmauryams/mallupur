@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
 import { useAuth } from "../contextApi/AuthContext.jsx";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
+import Loading from "../mallupurVillage/loader/Loading.jsx";
 
 // Lazy loaded pages
 const Front = lazy(() => import("../mallupurVillage/fontPage/Front"));
@@ -18,7 +19,13 @@ const RegisterComplaint = lazy(() => import('../mallupurVillage/complaint/Regist
 const ComplaintList = lazy(() => import('../mallupurVillage/complaint/complaintList/ComplaintList.jsx'));
 const ComplaintDetails = lazy(() => import('../mallupurVillage/complaint/ComplaintDetails/ComplaintDetail.jsx'));
 const Profile = lazy(() => import('../mallupurVillage/profile/Profile.jsx'));
-const EditProfile = lazy(()=>import('../mallupurVillage/profile/EditProfile.jsx'));
+const EditProfile = lazy(() => import('../mallupurVillage/profile/EditProfile.jsx'));
+const CreateVillageProject = lazy(() => import('../mallupurVillage/villageProject/CreateVillageProject/CreateVillageProject.jsx'));
+const VillageProjects = lazy(() => import('../mallupurVillage/project/VillageProjects.jsx'));
+const VillageProjectList = lazy(() => import('../mallupurVillage/project/VillageProjectList/VillageProjectList.jsx'));
+const VillageProjectDetails = lazy(() => import('../mallupurVillage/project/VillageProjectDetails/VillageProjectDetails.jsx'));
+const ForgotPassword = lazy(() => import('../mallupurVillage/ForgotPassword/ForgotPassword.jsx'));
+
 
 const AppRoutes = () => {
     const { user } = useAuth();
@@ -27,23 +34,31 @@ const AppRoutes = () => {
     return (
         <BrowserRouter>
             <ScrollToTop />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading borderColor="#000000" />}>
                 <Routes>
 
                     {/* Public Routes */}
                     <Route path="/" element={<Front />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/forgotPassword" element={<ForgotPassword />} />
 
                     {/* Protected Routes */}
                     <Route element={<ProtectedRoute />}>
                         <Route element={<AppLayout />}>
-                            <Route path="/home" element={role === "admin" ? <Dashboard /> : <UserDashboard />} />
+                            <Route path="/home" element={role === "ADMIN" ? <Dashboard /> : <UserDashboard />} />
                             <Route path="/services/complaint" element={<Complaint />} />
                             <Route path="/services/complaint/register" element={<RegisterComplaint />} />
                             <Route path="/services/complaint/list" element={<ComplaintList />} />
                             <Route path="/services/complaint/details/:id" element={<ComplaintDetails />} />
                             <Route path="/home/profile" element={<Profile />} />
-                            <Route path="/home/profile/edit" element={<EditProfile/>}/>
+                            <Route path="/home/profile/edit" element={<EditProfile />} />
+
+                            <Route path="/project/create" element={<CreateVillageProject />} />
+                            <Route path="/project" element={<VillageProjects />} />
+                            <Route path="/projects/all" element={<VillageProjectList />} />
+                            <Route path="/project/Details/:id" element={<VillageProjectDetails />} />
+                            <Route path="/project/edit/:id" element={<CreateVillageProject />} />
+
 
                             <Route path="/about" element={<AboutVillage />} />
                             <Route path="/contact" element={<Contact />} />

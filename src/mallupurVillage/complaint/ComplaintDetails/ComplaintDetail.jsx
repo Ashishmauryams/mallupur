@@ -94,7 +94,7 @@ const ComplaintDetail = () => {
 
   return (
     <div className="complaint-details-page">
-      <div className="complaint-details-container">
+      <div className="container">
 
         {/* <button
           className="back-button"

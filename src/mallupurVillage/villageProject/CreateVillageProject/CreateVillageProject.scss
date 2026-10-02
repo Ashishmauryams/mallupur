@@ -1,0 +1,320 @@
+.create-village-project {
+    width: 100%;
+    min-height: 100%;
+    padding: 35px;
+    background: #f8fafc;
+    color: #1e293b;
+    box-sizing: border-box;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        max-width: 1150px;
+        margin: 0 auto 25px;
+        padding: 35px;
+        border-radius: 20px;
+        background: linear-gradient(110deg, #0e65c7, #247fd7);
+        color: #ffffff;
+
+    }
+
+    &__header-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        background: #e0f2fe;
+        color: #0284c7;
+        flex-shrink: 0;
+    }
+
+    &__eyebrow {
+        margin: 0 0 4px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+    }
+
+    &__header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 750;
+    }
+
+    &__header p:last-child {
+        margin: 6px 0 0;
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    &__card {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+    }
+
+    // ==============================
+    // SECTION
+    // ==============================
+
+    &__section {
+        padding: 28px 30px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    &__section-title {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 24px;
+        color: #0284c7;
+
+        h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        span {
+            display: block;
+            margin-top: 4px;
+            font-size: 13px;
+            color: #64748b;
+        }
+    }
+
+    // ==============================
+    // GRID
+    // ==============================
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    // ==============================
+    // FIELD
+    // ==============================
+
+    &__field {
+        min-width: 0;
+
+        &--full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 650;
+            color: #334155;
+
+            strong {
+                color: #0284c7;
+                font-size: 13px;
+            }
+        }
+
+        input {
+            border: 1px solid #cbd5e1;
+            outline: none;
+            transition: 0.2s ease;
+            box-sizing: border-box;
+
+            &:focus {
+                border-color: #0284c7;
+                box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+            }
+        }
+
+        input {
+            height: 46px;
+            border-radius: 10px;
+        }
+
+
+
+
+        input[type="number"] {
+            padding: 0 12px 0 42px;
+        }
+
+    }
+
+
+
+
+    &__range {
+        width: 100%;
+        height: 6px;
+        margin-top: 10px;
+        accent-color: #0284c7;
+        cursor: pointer;
+    }
+
+    &__progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+
+        span {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+    }
+
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        padding: 22px 30px;
+        background: #f8fafc;
+    }
+
+    &__reset,
+    &__submit {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 18px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 650;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    &__reset {
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #475569;
+
+        &:hover {
+            background: #f1f5f9;
+        }
+    }
+
+    &__submit {
+        border: 1px solid #0284c7;
+        background: #0284c7;
+        color: #ffffff;
+
+        &:hover {
+            background: #0369a1;
+            border-color: #0369a1;
+        }
+    }
+
+    // ==============================
+    // TABLET
+    // ==============================
+
+    @media (max-width: 800px) {
+        padding: 25px 18px;
+
+        &__header {
+            margin-bottom: 22px;
+        }
+
+        &__header h1 {
+            font-size: 26px;
+        }
+
+        &__section {
+            padding: 24px 20px;
+        }
+
+        &__actions {
+            padding: 20px;
+        }
+    }
+
+    // ==============================
+    // MOBILE
+    // ==============================
+
+    @media (max-width: 600px) {
+        padding: 20px 12px;
+
+        &__header {
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        &__header-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+        }
+
+        &__header h1 {
+            font-size: 22px;
+        }
+
+        &__header p:last-child {
+            font-size: 13px;
+        }
+
+        &__grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        &__field--full {
+            grid-column: auto;
+        }
+
+        &__section {
+            padding: 22px 16px;
+        }
+
+        &__section-title {
+            margin-bottom: 20px;
+        }
+
+        &__actions {
+            flex-direction: column-reverse;
+            padding: 18px 16px;
+        }
+
+        &__reset,
+        &__submit {
+            width: 100%;
+        }
+    }
+
+    // ==============================
+    // SMALL MOBILE
+    // ==============================
+
+    @media (max-width: 400px) {
+        &__header h1 {
+            font-size: 20px;
+        }
+
+        &__header-icon {
+            width: 42px;
+            height: 42px;
+        }
+
+        &__section {
+            padding: 18px 13px;
+        }
+    }
+}

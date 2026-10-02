@@ -167,10 +167,10 @@ const AppHeader = () => {
 
                     {/* GALLERY */}
                     <NavLink
-                        to="/gallery"
+                        to="/project"
                         className={navClass}
                     >
-                        Gallery
+                        Project
                     </NavLink>
 
 
