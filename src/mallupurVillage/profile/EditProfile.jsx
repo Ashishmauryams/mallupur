@@ -18,8 +18,9 @@ import BackButton from "../reuseableCopmonent/BackButton/BackButton";
 import Input from "../reuseableCopmonent/Input";
 
 import ConfirmModal from "../reuseableCopmonent/ConfirmModal/ConfirmModal";
-import { getDeleteOne } from "../../api/apiService";
+import { getDeleteOne, getUpdateUser } from "../../api/apiService";
 import { useAlert } from "../../contextApi/AlertContext";
+import Loader from "../reuseableCopmonent/loader/Loader";
 
 
 const EditProfile = () => {
@@ -28,6 +29,7 @@ const EditProfile = () => {
     const location = useLocation();
 
     const user = location.state?.user;
+
 
     const [formData, setFormData] = useState({
         fullName: user?.fullName || "",
@@ -42,6 +44,7 @@ const EditProfile = () => {
 
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [deleting, setDeleting] = useState(false);
 
@@ -74,17 +77,32 @@ const EditProfile = () => {
         e.preventDefault();
 
         try {
+            setLoading(true);
+            const resp = await getUpdateUser(formData);
 
-            console.log("Updated Profile:", formData);
+            if (resp?.status === 200) {
 
-            navigate("/home/profile");
+                showAlert({
+                    message: "Account Updated successfully!",
+                    duration: 3000,
+                    severity: "success",
+                    variant: "filled",
+                });
+
+                navigate("/home/profile");
+            }
 
         } catch (error) {
 
-            console.error(
-                "Profile update error:",
-                error
-            );
+            showAlert({
+                message: error?.message || "something wents wrong",
+                duration: 3000,
+                severity: "error",
+                variant: "filled",
+            });
+
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -265,9 +283,14 @@ const EditProfile = () => {
                             type="submit"
                             className="edit-profile-page__save-btn"
                         >
-                            <Save size={18} />
+                            {loading ? <Loader /> :
+                                <div>
+                                    <Save size={18} />
 
-                            Save Changes
+                                    Save Changes
+                                </div>
+
+                            }
                         </button>
 
                     </div>

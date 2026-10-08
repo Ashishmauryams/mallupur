@@ -9,11 +9,6 @@
    COMMON
 ========================================= */
 
-.dashboard-container {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
-}
-
 .dashboard-label,
 .section-title-row span,
 .card-heading span,
@@ -32,17 +27,15 @@
 
 .dashboard-top {
   padding: 45px 0;
-
   background: var(--bg-primary);
 
-  border-bottom: 1px solid var(--button-border);
 }
 
 .dashboard-top .dashboard-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  padding: 0 24px;
   gap: 30px;
 }
 

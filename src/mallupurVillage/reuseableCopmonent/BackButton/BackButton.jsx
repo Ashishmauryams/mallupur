@@ -16,7 +16,7 @@ const BackButton = ({ label = "Back", path = -1 }) => {
       onClick={() => navigate(path)}
 
     >
-      <ArrowLeft size={18} />
+      <ArrowLeft size={17} />
       <span>{label}</span>
     </button>
   );

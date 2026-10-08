@@ -45,8 +45,8 @@
   }
 
   textarea:focus {
-    border-color: var(--inputBorderFocus-color);
-    box-shadow: var(--inputBoxShadow-color);
+    border-color: var(--input-border-focus);
+    box-shadow: var(--input-focus-shadow);
   }
 
   textarea.input-error {
@@ -54,7 +54,7 @@
   }
 
   textarea.input-error:focus {
-    box-shadow: var(--inputBoxShadow-color);
+    box-shadow: var(--input-focus-shadow);
   }
 
   textarea:disabled {

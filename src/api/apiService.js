@@ -23,6 +23,31 @@ export const logoutUser = () => {
   );
 };
 
+export const getForgotPasswordOtp = (email) => {
+  return axiosInstance.post(
+    API_URL.AUTH.FORGOT_PASSWORD_OTP,
+    null,
+    {
+      params: { email }
+    }
+  );
+};
+
+export const getForgotPasswordVerify = (email, otp, newPassword) => {
+  return axiosInstance.post(
+    API_URL.AUTH.FORGOT_PASSWORD_VERIFY,
+    null,
+    {
+      params: {
+        email,
+        otp,
+        newPassword
+
+      }
+    }
+  );
+}
+
 // --------COMPLAINT------>
 
 export const registerComplaint = (data) => {
@@ -63,6 +88,45 @@ export const getDeleteOne = () => {
   return axiosInstance.delete(API_URL.USER.DELETE_ONE);
 }
 
+export const getUpdateUser = (data) => {
+  return axiosInstance.put(
+    API_URL.USER.UPDATE_USER,
+    data
+  );
+}
+
+//ADMIN PANNEL
+
+
+export const getAllUsers = () => {
+  return axiosInstance.get(
+    API_URL.USER.GET_ALL_USERS
+  );
+}
+
+export const getAdminUserById = (id) => {
+  return axiosInstance.get(
+    API_URL.USER.GET_USER_BY_ADMIN(id)
+  );
+}
+
+export const getDeleteUserByAdmin = (id) => {
+  return axiosInstance.delete(
+    API_URL.USER.GET_DELETEUSER_BY_ADMIN(id)
+  );
+}
+
+export const getUserFilter = (username) => {
+  return axiosInstance.get(
+    API_URL.USER.GET_FILTER_BY_USERNAME,
+    {
+      params: {
+        username: username
+      }
+    }
+  )
+}
+
 // ==================== project ====================
 
 export const getCreateProject = (data) => {
@@ -96,3 +160,11 @@ export const getDeleteProject = (id) => {
     API_URL.PROJECT.GET_DELETE_PROJECT(id)
   );
 };
+
+//dashborad
+
+export const getTotalNumber = () => {
+  return axiosInstance.get(
+    API_URL.ADMIN_DASHBORAD.GET_TOTAL_NUMBER
+  );
+}

@@ -1,19 +1,18 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import "./UserDashboard.scss";
 import { useAuth } from "../../contextApi/AuthContext";
 import { ChartBarBig, Clock, Files, Houses, Mail, MapPin, MessageCircleDashedCheck, Newspaper, NotebookPen, NotebookText, Phone } from "lucide-react";
+import { getUserProfile } from "../../api/apiService";
 
 const UserDashboard = () => {
-  const { user } = useAuth();
 
-  //   const user = {
-  //     fullName: "Aashish Maurya",
-  //     email: "aashish@example.com",
-  //     phone: "+91 98765 43210",
-  //     role: "Village Resident",
-  //   };
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState({});
+
+
+  const { user } = useAuth();
 
   const services = [
     {
@@ -70,6 +69,25 @@ const UserDashboard = () => {
     },
   ];
 
+  useEffect(() => {
+    fetchUsersProfile();
+  }, []);
+
+  const fetchUsersProfile = async () => {
+    try {
+      setLoading(true);
+      const resp = await getUserProfile();
+      if (resp?.status === 200 && resp?.data) {
+        setUserData(resp?.data);
+      }
+
+    } catch (err) {
+      console.log("err----", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className="user-dashboard">
 
@@ -87,7 +105,7 @@ const UserDashboard = () => {
 
             <h1>
               Welcome back,{" "}
-              <span>{user.fullName.split(" ")[0]}</span> 
+              <span>{user?.fullName.split(" ")[0]}</span>
             </h1>
 
             <p>
@@ -98,7 +116,7 @@ const UserDashboard = () => {
 
           <Link to="/home/profile" className="profile-button">
             <span className="profile-small-avatar">
-              {user.fullName.charAt(0)}
+              {user?.fullName.charAt(0)}
             </span>
 
             <span>My Profile</span>
@@ -114,7 +132,7 @@ const UserDashboard = () => {
       ========================================== */}
 
       <section className="dashboard-content">
-        <div className="dashboard-container">
+        <div className="container">
 
           {/* =====================================
               PROFILE + STATS
@@ -131,7 +149,7 @@ const UserDashboard = () => {
               <div className="profile-content">
 
                 <div className="profile-avatar">
-                  {user.fullName.charAt(0)}
+                  {user?.fullName.charAt(0)}
                 </div>
 
                 <div className="profile-info">
@@ -139,9 +157,9 @@ const UserDashboard = () => {
                     ✓ Verified Citizen
                   </span>
 
-                  <h2>{user.fullName}</h2>
+                  <h2>{user?.fullName}</h2>
 
-                  <p>{user.role}</p>
+                  <p>{user?.role}</p>
                 </div>
 
                 <Link
@@ -158,7 +176,7 @@ const UserDashboard = () => {
 
                     <div>
                       <small>Email Address</small>
-                      <strong>{user.email}</strong>
+                      <strong>{userData?.email}</strong>
                     </div>
                   </div>
 
@@ -167,7 +185,7 @@ const UserDashboard = () => {
 
                     <div>
                       <small>Mobile Number</small>
-                      <strong>{user.phone}</strong>
+                      <strong>{userData?.phone}</strong>
                     </div>
                   </div>
 

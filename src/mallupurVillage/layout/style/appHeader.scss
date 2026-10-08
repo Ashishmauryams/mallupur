@@ -1,8 +1,9 @@
 .app-header {
     width: 100%;
-    position: relative;
+    position: fixed;
     z-index: 1000;
-
+    top: 0;
+    left: 0;
     background: #0d2b52;
     color: #ffffff;
 

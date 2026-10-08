@@ -17,6 +17,9 @@ const AppHeader = () => {
 
     const { logout } = useAuth();
 
+    const { user } = useAuth();
+    const role = user?.role;
+
     // Close mobile menu
     const closeMobileMenu = () => {
         setMobileMenu(false);
@@ -92,23 +95,33 @@ const AppHeader = () => {
                                 }`}
                         >
 
-                            <NavLink to="/services">
+                            <NavLink to="/services" end>
                                 All Services
                             </NavLink>
 
-                            <NavLink to="/services/complaint">
+                            <NavLink to="/services/complaint"
+                                onClick={() => setServiceOpen(false)}
+                            >
                                 Complaint
                             </NavLink>
 
-                            <NavLink to="/services/birth">
-                                Birth Certificate
-                            </NavLink>
+                            {role === "ADMIN" &&
+                                <NavLink to="/services/users"
+                                    onClick={() => setServiceOpen(false)}
+                                >
+                                    Users
+                                </NavLink>
+                            }
 
-                            <NavLink to="/services/death">
+                            <NavLink to="/services/death"
+                                onClick={() => setServiceOpen(false)}
+                            >
                                 Death Certificate
                             </NavLink>
 
-                            <NavLink to="/services/residence">
+                            <NavLink to="/services/residence"
+                                onClick={() => setServiceOpen(false)}
+                            >
                                 Residence Certificate
                             </NavLink>
 
@@ -144,7 +157,9 @@ const AppHeader = () => {
                                 }`}
                         >
 
-                            <NavLink to="/schemes">
+                            <NavLink to="/schemes"
+                                end
+                            >
                                 All Schemes
                             </NavLink>
 

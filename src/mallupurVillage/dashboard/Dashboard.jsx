@@ -1,33 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-    Box,
-    Card,
-    CardContent,
-    Typography,
-    Grid,
-    Chip,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
+    Box, Card, CardContent, Typography, Grid, Chip, Table,
+    TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from "@mui/material";
-
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-} from "@mui/x-charts";
-
-import {
-  People ,
-  ReportProblemOutlined,
-  CheckCircle,
-  PendingActions
-} from "@mui/icons-material";
+import { LineChart, BarChart, PieChart, } from "@mui/x-charts";
+import { People, ReportProblemOutlined, CheckCircle, PendingActions } from "@mui/icons-material";
 
 import "./Dashboard.scss";
+import { getTotalNumber } from "../../api/apiService";
+import Loader from "../reuseableCopmonent/loader/Loader";
 
 
 const userData = [
@@ -112,6 +93,32 @@ const getStatusColor = (status) => {
 
 const Dashboard = () => {
 
+    const [loading, setLoading] = useState(false);
+    const [totalData, setTotalData] = useState({});
+
+    useEffect(() => {
+        fetchTotalData();
+    }, []);
+
+    const fetchTotalData = async () => {
+
+        try {
+            setLoading(true);
+
+            const resp = await getTotalNumber();
+
+            if (resp?.status === 200) {
+                setTotalData(resp?.data);
+            }
+
+        } catch (err) {
+            console.log("eer", err);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
     return (
         <Box className="dashboard">
 
@@ -149,108 +156,116 @@ const Dashboard = () => {
 
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Card className="stat-card">
-                        <CardContent>
+                        {loading ? <div className="dashLoader"><Loader /></div> :
+                            <CardContent>
 
-                            <Box className="stat-top">
-                                <Box className="stat-icon">
-                                    <People  />
+                                <Box className="stat-top">
+                                    <Box className="stat-icon">
+                                        <People />
+                                    </Box>
+
+                                    <Typography className="stat-growth">
+                                        +12.5%
+                                    </Typography>
                                 </Box>
 
-                                <Typography className="stat-growth">
-                                    +12.5%
+                                <Typography className="stat-value">
+                                    {totalData?.totalUsers}
                                 </Typography>
-                            </Box>
 
-                            <Typography className="stat-value">
-                                1,250
-                            </Typography>
+                                <Typography className="stat-label">
+                                    Total Users
+                                </Typography>
 
-                            <Typography className="stat-label">
-                                Total Users
-                            </Typography>
-
-                        </CardContent>
+                            </CardContent>
+                        }
                     </Card>
                 </Grid>
 
 
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Card className="stat-card">
-                        <CardContent>
+                        {loading ? <div className="dashLoader"><Loader /></div> :
+                            <CardContent>
 
-                            <Box className="stat-top">
-                                <Box className="stat-icon">
-                                    <ReportProblemOutlined />
+                                <Box className="stat-top">
+                                    <Box className="stat-icon">
+                                        <ReportProblemOutlined />
+                                    </Box>
+
+                                    <Typography className="stat-growth">
+                                        +8.2%
+                                    </Typography>
                                 </Box>
 
-                                <Typography className="stat-growth">
-                                    +8.2%
+                                <Typography className="stat-value">
+                                    {totalData?.totalProblems}
                                 </Typography>
-                            </Box>
 
-                            <Typography className="stat-value">
-                                86
-                            </Typography>
+                                <Typography className="stat-label">
+                                    Total Complaints
+                                </Typography>
 
-                            <Typography className="stat-label">
-                                Total Complaints
-                            </Typography>
-
-                        </CardContent>
+                            </CardContent>
+                        }
                     </Card>
                 </Grid>
 
 
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Card className="stat-card">
-                        <CardContent>
+                        {loading ? <div className="dashLoader"><Loader /></div> :
+                            <CardContent>
 
-                            <Box className="stat-top">
-                                <Box className="stat-icon">
-                                    <PendingActions />
+                                <Box className="stat-top">
+                                    <Box className="stat-icon">
+                                        <PendingActions />
+                                    </Box>
+
+                                    <Typography className="stat-growth warning">
+                                        24
+                                    </Typography>
                                 </Box>
 
-                                <Typography className="stat-growth warning">
-                                    24
+                                <Typography className="stat-value">
+                                    {totalData?.pendingProblems}
                                 </Typography>
-                            </Box>
 
-                            <Typography className="stat-value">
-                                24
-                            </Typography>
+                                <Typography className="stat-label">
+                                    Pending Complaints
+                                </Typography>
 
-                            <Typography className="stat-label">
-                                Pending Complaints
-                            </Typography>
-
-                        </CardContent>
+                            </CardContent>
+                        }
                     </Card>
                 </Grid>
 
 
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Card className="stat-card">
-                        <CardContent>
+                        {loading ? <div className="dashLoader"><Loader /></div> :
+                            <CardContent>
 
-                            <Box className="stat-top">
-                                <Box className="stat-icon">
-                                    <CheckCircle />
+                                <Box className="stat-top">
+                                    <Box className="stat-icon">
+                                        <CheckCircle />
+                                    </Box>
+
+                                    <Typography className="stat-growth">
+                                        72.1%
+                                    </Typography>
                                 </Box>
 
-                                <Typography className="stat-growth">
-                                    72.1%
+                                <Typography className="stat-value">
+                                    {totalData?.resolvedProblems}
                                 </Typography>
-                            </Box>
 
-                            <Typography className="stat-value">
-                                62
-                            </Typography>
+                                <Typography className="stat-label">
+                                    Resolved Complaints
+                                </Typography>
 
-                            <Typography className="stat-label">
-                                Resolved Complaints
-                            </Typography>
-
-                        </CardContent>
+                            </CardContent>
+                        }
                     </Card>
                 </Grid>
 

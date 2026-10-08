@@ -25,6 +25,9 @@ const VillageProjects = lazy(() => import('../mallupurVillage/project/VillagePro
 const VillageProjectList = lazy(() => import('../mallupurVillage/project/VillageProjectList/VillageProjectList.jsx'));
 const VillageProjectDetails = lazy(() => import('../mallupurVillage/project/VillageProjectDetails/VillageProjectDetails.jsx'));
 const ForgotPassword = lazy(() => import('../mallupurVillage/ForgotPassword/ForgotPassword.jsx'));
+const UserList = lazy(() => import('../mallupurVillage/user/UserList.jsx'));
+const UserDetails = lazy(() => import('../mallupurVillage/user/UserDetail/UserDetails.jsx'));
+const NotFoundGlobal = lazy(() => import('../mallupurVillage/NotFoundGlobal/NotFoundGlobal.jsx'));
 
 
 const AppRoutes = () => {
@@ -59,10 +62,17 @@ const AppRoutes = () => {
                             <Route path="/project/Details/:id" element={<VillageProjectDetails />} />
                             <Route path="/project/edit/:id" element={<CreateVillageProject />} />
 
+                            <Route path="/services/users" element={role === "ADMIN" && <UserList />} />
+                            <Route path="/user/details/:id" element={role === "ADMIN" && <UserDetails />} />
+
 
                             <Route path="/about" element={<AboutVillage />} />
                             <Route path="/contact" element={<Contact />} />
                         </Route>
+
+                        {/* Invalid URL */}
+
+                        <Route path="*" element={<NotFoundGlobal />} />
                     </Route>
 
                 </Routes>

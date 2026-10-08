@@ -1,0 +1,406 @@
+.user-details {
+    width: 100%;
+    padding: 28px 24px 40px;
+
+    // ==========================================
+    // TOP BAR
+    // ==========================================
+
+    &__topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    &__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border: none;
+        border-radius: 7px;
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &:hover {
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+
+    &__action {
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 0 14px;
+        border-radius: 7px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &--edit {
+            border: 1px solid #d9dedb;
+            background: var(--primaryBg-color);
+            color: var(--text-primary);
+
+            &:hover {
+                border-color: var(--primary-color);
+                color: var(--primary-color);
+            }
+        }
+
+        &--delete {
+            border: 1px solid #fecaca;
+            background: #fff7f7;
+            color: #dc2626;
+
+            &:hover {
+                border-color: #ef4444;
+                background: #fef2f2;
+            }
+        }
+    }
+
+    // ==========================================
+    // PROFILE HEADER
+    // ==========================================
+
+    &__profile {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border: 1px solid #e6e9e7;
+        border-radius: 14px;
+        background: var(--primaryBg-color);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.035);
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+    }
+
+    &__avatar {
+        width: 76px;
+        height: 76px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid var(--primary-light);
+        border-radius: 50%;
+        background: var(--primary-color);
+        color: #ffffff;
+        font-size: 29px;
+        font-weight: 700;
+        box-shadow: 0 3px 10px rgba(41, 134, 78, 0.18);
+    }
+
+    &__profile-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__name-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        h1 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+
+    &__role {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        width: fit-content;
+        padding: 4px 9px;
+        border-radius: 20px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+
+    &__role--large {
+        padding: 6px 11px;
+        font-size: 12px;
+    }
+
+    &__username {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: 6px 0 0;
+        color: var(--text-secondary);
+        font-size: 14px;
+    }
+
+    &__member {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 7px 0 0;
+        color: #9ca3af;
+        font-size: 12px;
+    }
+
+    &__user-id {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 3px;
+        padding-left: 20px;
+        border-left: 1px solid #edf0ee;
+
+        span {
+            color: #9ca3af;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-size: 15px;
+            font-weight: 700;
+        }
+    }
+
+    // ==========================================
+    // CONTENT
+    // ==========================================
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    // ==========================================
+    // SECTION
+    // ==========================================
+
+    &__section {
+        padding: 22px;
+        border: 1px solid #e6e9e7;
+        border-radius: 14px;
+        background: var(--primaryBg-color);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.025);
+    }
+
+    &__section-heading {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding-bottom: 18px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #edf0ee;
+    }
+
+    &__section-icon {
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+    }
+
+    &__section-heading h2 {
+        margin: 0;
+        color: var(--text-primary);
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    &__section-heading p {
+        margin: 3px 0 0;
+        color: var(--text-secondary);
+        font-size: 12px;
+    }
+
+    // ==========================================
+    // PERSONAL INFORMATION
+    // ==========================================
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 35px;
+    }
+
+    &__field {
+        min-width: 0;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 7px;
+        color: #8b9290;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+
+    &__value {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 40px;
+        padding: 0 12px;
+        border: 1px solid #edf0ee;
+        border-radius: 8px;
+        background: #fafcfb;
+        color: var(--text-primary);
+        font-size: 14px;
+        font-weight: 500;
+
+        svg {
+            flex-shrink: 0;
+            color: var(--primary-color);
+        }
+    }
+
+    // ==========================================
+    // ACCOUNT INFORMATION
+    // ==========================================
+
+    &__account-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    &__account-card {
+        min-height: 82px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        padding: 15px;
+        border: 1px solid #edf0ee;
+        border-radius: 9px;
+        background: #fafcfb;
+
+        strong {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+
+    &__account-label {
+        color: #8b9290;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.25px;
+    }
+
+    // ==========================================
+    // RESPONSIVE
+    // ==========================================
+
+    @media (max-width: 768px) {
+        padding: 20px 0 30px;
+
+        &__topbar {
+            align-items: flex-start;
+        }
+
+        &__profile {
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        &__user-id {
+            display: none;
+        }
+
+        &__grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        &__account-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 520px) {
+        &__topbar {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        &__actions {
+            width: 100%;
+        }
+
+        &__action {
+            flex: 1;
+        }
+
+        &__profile {
+            gap: 13px;
+            padding: 17px;
+        }
+
+        &__avatar {
+            width: 58px;
+            height: 58px;
+            border-width: 3px;
+            font-size: 22px;
+        }
+
+        &__name-row {
+            h1 {
+                font-size: 18px;
+            }
+        }
+
+        &__section {
+            padding: 17px;
+        }
+
+        &__section-heading {
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+    }
+}
