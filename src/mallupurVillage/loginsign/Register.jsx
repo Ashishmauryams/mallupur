@@ -167,24 +167,26 @@ const Register = ({ toggleFn, setToggle }) => {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <Input
-                        label="Fullname"
-                        name="fullName"
-                        placeholder="Enter your full name"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        error={error.fullName}
-                        leftIcon={<User size={21} />}
-                    />
-                    <Input
-                        label="Phone"
-                        name="phone"
-                        placeholder="Enter your phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        error={error.phone}
-                        leftIcon={<Phone size={21} />}
-                    />
+                    <div className="profile-input-row">
+                        <Input
+                            label="Fullname"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            error={error.fullName}
+                            leftIcon={<User size={21} />}
+                        />
+                        <Input
+                            label="Phone"
+                            name="phone"
+                            placeholder="Enter your phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            error={error.phone}
+                            leftIcon={<Phone size={21} />}
+                        />
+                    </div>
                     <Input
                         label="Username"
                         name="username"

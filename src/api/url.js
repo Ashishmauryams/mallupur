@@ -29,7 +29,7 @@ const API_URL = {
     CREATE_PROJECT: "/v2/village/create",
     GET_ALL_PROJECT: "/v2/village/find",
     GET_DETAILS_BY_ID: (id) => `/v2/village/byid/${id}`,
-    GET_UPDATE_PROJECT: (id) => `/v2/village/update/byid/${id}`,
+    GET_UPDATE_PROJECT: (id) => `/v2/village/update/${id}`,
     GET_DELETE_PROJECT: (id) => `/v2/village/delete/byid/${id}`
   },
   ADMIN_DASHBORAD: {

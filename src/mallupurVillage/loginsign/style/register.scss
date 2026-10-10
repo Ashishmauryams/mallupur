@@ -9,7 +9,7 @@
   .register-container {
     width: 100%;
     max-width: 700px;
-    padding: 40px 45px;
+    padding: 48px 45px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 24px;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
@@ -18,7 +18,7 @@
 
   .register-content {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 42px;
 
     h1 {
       margin: 0;
@@ -32,6 +32,15 @@
       color: #8a9199;
       font-size: 20px;
     }
+  }
+
+  .profile-input-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+
   }
 
   /* =========================================
@@ -83,13 +92,19 @@
     ========================================= */
 
   @media (max-width: 768px) {
+    align-items: flex-start;
     padding: 25px 16px 35px;
 
     .register-container {
+      min-height: 100vh;
       max-width: 100%;
-      padding: 30px 20px;
-      border-radius: 20px;
-      box-shadow: none;
+      border-radius: 0;
+      flex-direction: column;
+    }
+
+    .profile-input-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
 
     .overlay-content {

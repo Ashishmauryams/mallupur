@@ -88,12 +88,24 @@ export const getDeleteOne = () => {
   return axiosInstance.delete(API_URL.USER.DELETE_ONE);
 }
 
-export const getUpdateUser = (data) => {
+// export const getUpdateUser = (formData) => {
+//   return axiosInstance.put(
+//     API_URL.USER.UPDATE_USER,
+//     formData
+//   );
+// }
+
+export const getUpdateUser = (formData) => {
   return axiosInstance.put(
-    API_URL.USER.UPDATE_USER,
-    data
+    "/v1/users/update",
+    formData,
+    {
+      headers: {
+        "Content-Type": undefined,
+      },
+    }
   );
-}
+};
 
 //ADMIN PANNEL
 

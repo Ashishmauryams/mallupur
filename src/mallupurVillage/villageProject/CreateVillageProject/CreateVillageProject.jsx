@@ -225,7 +225,7 @@ const CreateVillageProject = () => {
                     </div>
                 </div>
 
-                <BackButton path={"/project"} />
+                <BackButton />
             </div>
 
 

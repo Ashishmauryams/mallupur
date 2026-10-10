@@ -94,7 +94,7 @@ const RegisterComplaint = () => {
                     severity: "success",
                     variant: "filled",
                 });
-                navigate("/services/complaint/list");
+                navigate("/services/complaint/my");
                 setFormData({
                     title: "",
                     description: "",
