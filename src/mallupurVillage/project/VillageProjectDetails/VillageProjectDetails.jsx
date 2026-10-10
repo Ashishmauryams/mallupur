@@ -18,6 +18,8 @@ import {
 import "./VillageProjectDetails.scss";
 import { getProjectDetailById } from "../../../api/apiService";
 import Loading from "../../loader/Loading";
+import BackButton from "../../reuseableCopmonent/BackButton/BackButton";
+import Button from "../../reuseableCopmonent/Button/Button";
 
 const VillageProjectDetails = () => {
 
@@ -121,28 +123,18 @@ const VillageProjectDetails = () => {
 
                 <div className="container">
                     <div className="village-project-details__topbar">
+                        <BackButton path={"/projects/all"} />
 
-                        <button
-                            className="village-project-details__back"
-                            onClick={() =>
-                                navigate("/projects/all")
-                            }
-                        >
-                            <ArrowLeft size={18} />
-                            Back to Projects
-                        </button>
-
-                        <button
-                            className="village-project-details__edit"
-                            onClick={() =>
-                                navigate(
-                                    `/project/edit/${project?.id}`, { state: { project } }
-                                )
-                            }
-                        >
-                            <Pencil size={17} />
-                            Edit Project
-                        </button>
+                        <Button
+                            fontWeight="650"
+                            height="42px"
+                            fontSize="12px"
+                            width="130px"
+                            text={<>Edit Project <Pencil size={17} style={{ marginLeft: "7px" }} /></>}
+                            onClick={() => navigate(
+                                `/project/edit/${project?.id}`, { state: { project } }
+                            )}
+                        />
 
                     </div>
 

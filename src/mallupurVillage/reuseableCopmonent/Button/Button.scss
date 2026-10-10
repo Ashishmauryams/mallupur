@@ -1,5 +1,5 @@
 .dynamic-button {
-    width: 100%;
+    width: var(--button-width);
     height: var(--button-height);
 
     border: none;
@@ -15,7 +15,7 @@
     justify-content: center;
 
     font-size: var(--button-font-size);
-    font-weight: 700;
+    font-weight: var(--button-weight);
 
     cursor: pointer;
 

@@ -1,12 +1,15 @@
 
-
 import { useNavigate } from "react-router";
-import "./ComplaintList.scss";
 import { useEffect, useState } from "react";
-import { getComplaintDetails } from "../../../api/apiService";
-import { BookOpenCheck, CalendarDays, MapPin, Zap } from "lucide-react";
-import BackButton from "../../reuseableCopmonent/BackButton/BackButton";
+import {
+    BookOpenCheck,
+    ArrowRight,
+    MessageSquareWarning,
+} from "lucide-react";
 
+import "./ComplaintList.scss";
+import { getComplaintDetails } from "../../../api/apiService";
+import BackButton from "../../reuseableCopmonent/BackButton/BackButton";
 
 const ComplaintList = () => {
     const navigate = useNavigate();
@@ -19,6 +22,7 @@ const ComplaintList = () => {
         fetchComplaints();
     }, []);
 
+    // Fetch complaints from API
     const fetchComplaints = async () => {
         try {
             setLoading(true);
@@ -26,31 +30,24 @@ const ComplaintList = () => {
 
             const response = await getComplaintDetails();
 
-            setComplaints(response?.data);
+            setComplaints(
+                Array.isArray(response?.data) ? response.data : []
+            );
         } catch (err) {
             console.error(err);
 
             setError(
                 err.response?.data?.message ||
-                "Something wents wrong"
+                "Something went wrong. Please try again."
             );
         } finally {
             setLoading(false);
         }
     };
 
-    const formatDate = (date) => {
-        if (!date) return "-";
-
-        return new Date(date).toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-        });
-    };
-
+    // Format category name
     const getCategoryName = (category) => {
-        if (!category) return "";
+        if (!category) return "General";
 
         return category
             .toLowerCase()
@@ -58,30 +55,49 @@ const ComplaintList = () => {
             .replace(/\b\w/g, (char) => char.toUpperCase());
     };
 
+    // Format status
+    const getStatusName = (status) => {
+        if (!status) return "Unknown";
+
+        return status
+            .toLowerCase()
+            .replaceAll("_", " ")
+            .replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+
+    // Loading state
     if (loading) {
         return (
             <div className="complaint-list-page">
-                <div className="complaint-loader">
-                    <div className="loader"></div>
-                    <p>Loading complaints...</p>
+                <div className="container">
+                    <div className="complaint-list-page__loader">
+                        <span className="complaint-list-page__spinner" />
+                        <p>Loading complaints...</p>
+                    </div>
                 </div>
             </div>
         );
     }
 
+    // Error state
     if (error) {
         return (
             <div className="complaint-list-page">
-                <div className="complaint-error">
-                    <div className="error-icon">!</div>
+                <div className="container">
+                    <div className="complaint-list-page__error">
+                        <div className="complaint-list-page__error-icon">!</div>
 
-                    <h3>Unable to load complaints</h3>
+                        <h2>Unable to Load Complaints</h2>
+                        <p>{error}</p>
 
-                    <p>{error}</p>
-
-                    <button onClick={fetchComplaints}>
-                        Try Again
-                    </button>
+                        <button
+                            type="button"
+                            onClick={fetchComplaints}
+                            className="complaint-list-page__primary-btn"
+                        >
+                            Try Again
+                        </button>
+                    </div>
                 </div>
             </div>
         );
@@ -90,159 +106,123 @@ const ComplaintList = () => {
     return (
         <div className="complaint-list-page">
             <div className="container">
-
-                {/* PAGE HEADER */}
-                <div style={{ justifySelf: "end", marginBottom: "30px" }}>
+                {/* Back button */}
+                <div className="complaint-list-page__back">
                     <BackButton />
                 </div>
-                <div className="page-header">
-                    <div>
-                        <span className="page-label">
+
+                {/* Page heading */}
+                <header className="complaint-list-page__header">
+                    <div className="complaint-list-page__heading-content">
+                        <span className="complaint-list-page__eyebrow">
                             VILLAGE PORTAL
                         </span>
 
                         <h1>My Complaints</h1>
 
                         <p>
-                            Track and manage the complaints you have
-                            reported.
+                            View your reported complaints and check their current status.
+                            Open a complaint to see its complete details.
                         </p>
                     </div>
 
-                    <div className="complaint-count">
-                        <strong>{complaints.length}</strong>
-                        <span>
-                            {complaints?.length === 1
-                                ? "Complaint"
-                                : "Complaints"}
+                    <div className="complaint-list-page__count">
+                        <span className="complaint-list-page__count-icon">
+                            <MessageSquareWarning size={23} />
                         </span>
-                    </div>
-                </div>
-                {complaints?.length === 0 ? (
-                    <div className="empty-state">
-                        <div className="empty-icon"><BookOpenCheck /></div>
 
-                        <h2>No Complaints Found</h2>
+                        <div>
+                            <strong>{complaints.length}</strong>
+                            <span>
+                                {complaints.length === 1
+                                    ? "Complaint"
+                                    : "Complaints"}
+                            </span>
+                        </div>
+                    </div>
+                </header>
+
+                {/* Complaint list */}
+                {complaints.length === 0 ? (
+                    <div className="complaint-list-page__empty">
+                        <div className="complaint-list-page__empty-icon">
+                            <BookOpenCheck size={34} />
+                        </div>
+
+                        <h2>No Complaints Yet</h2>
 
                         <p>
-                            You haven't registered any complaint yet.
+                            You haven't registered any complaints yet.
+                            Report an issue to help improve your village.
                         </p>
 
                         <button
+                            type="button"
+                            className="complaint-list-page__primary-btn"
                             onClick={() =>
                                 navigate("/home/complaints/register")
                             }
                         >
                             Register Complaint
+                            <ArrowRight size={17} />
                         </button>
                     </div>
                 ) : (
-                    <div className="complaint-list">
-
+                    <section className="complaint-list-page__list">
                         {complaints
                             .slice()
                             .sort(
                                 (a, b) =>
-                                    new Date(b.createdAt) -
-                                    new Date(a.createdAt)
+                                    new Date(b.createdAt) - new Date(a.createdAt)
                             )
                             .map((complaint) => (
-                                <div
+                                <article
                                     className="complaint-card"
                                     key={complaint.id}
                                 >
+                                    {/* Card heading */}
+                                    <div className="complaint-card__top">
+                                        <div className="complaint-card__identity">
+                                            <span className="complaint-card__id">
+                                                #{complaint.id}
+                                            </span>
 
-                                    {/* CARD TOP */}
-                                    <div className="card-top">
-
-                                        <div className="complaint-title-section">
-                                            <div className="complaint-number">
-                                                #{complaint?.id}
-                                            </div>
-
-                                            <div>
-                                                <span className="category">
-                                                    {getCategoryName(
-                                                        complaint?.category
-                                                    )}
-                                                </span>
-
-                                                <h2>{complaint?.title}</h2>
-                                            </div>
+                                            <span className="complaint-card__category">
+                                                {getCategoryName(complaint.category)}
+                                            </span>
                                         </div>
 
-                                        <div
-                                            className={`status-badge ${complaint?.status?.toLowerCase()}`}
+                                        <span
+                                            className={`complaint-card__status complaint-card__status--${(
+                                                complaint.status || "unknown"
+                                            )
+                                                .toLowerCase()
+                                                .replaceAll("_", "-")}`}
                                         >
-                                            <span></span>
-                                            {complaint.status?.replaceAll("_", " ")}
-                                        </div>
+                                            <span className="complaint-card__status-dot" />
+                                            {getStatusName(complaint.status)}
+                                        </span>
                                     </div>
 
-                                    {/* DESCRIPTION */}
-                                    <p className="description">
-                                        {complaint?.description}
-                                    </p>
+                                    {/* Title and short description */}
+                                    <div className="complaint-card__body">
+                                        <h2>{complaint.title || "Untitled Complaint"}</h2>
 
-                                    {/* DETAILS */}
-                                    <div className="complaint-details">
-
-                                        <div className="detail">
-                                            <span className="detail-icon">
-                                                <MapPin />
-                                            </span>
-
-                                            <div>
-                                                <label>Location</label>
-                                                <p>{complaint?.location}</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="detail">
-                                            <span className="detail-icon">
-                                                <Zap />
-                                            </span>
-
-                                            <div>
-                                                <label>Priority</label>
-
-                                                <p
-                                                    className={`priority ${complaint?.priority?.toLowerCase()}`}
-                                                >
-                                                    {complaint?.priority}
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="detail">
-                                            <span className="detail-icon">
-                                                <CalendarDays />
-                                            </span>
-
-                                            <div>
-                                                <label>Reported On</label>
-                                                <p>
-                                                    {formatDate(
-                                                        complaint?.createdAt
-                                                    )}
-                                                </p>
-                                            </div>
-                                        </div>
-
+                                        <p>
+                                            {complaint.description ||
+                                                "No description provided."}
+                                        </p>
                                     </div>
 
-                                    {/* CARD BOTTOM */}
-                                    <div className="card-bottom">
-
-                                        <span className="reported-by">
-                                            Reported by{" "}
-                                            <strong>
-                                                {complaint.reportedBy}
-                                            </strong>
+                                    {/* View details */}
+                                    <div className="complaint-card__footer">
+                                        <span className="complaint-card__footer-note">
+                                            View full complaint information
                                         </span>
 
                                         <button
-                                            className="view-button"
+                                            type="button"
+                                            className="complaint-card__view-btn"
                                             onClick={() =>
                                                 navigate(
                                                     `/services/complaint/details/${complaint.id}`
@@ -250,14 +230,12 @@ const ComplaintList = () => {
                                             }
                                         >
                                             View Details
-                                            <span>→</span>
+                                            <ArrowRight size={17} />
                                         </button>
-
                                     </div>
-
-                                </div>
+                                </article>
                             ))}
-                    </div>
+                    </section>
                 )}
             </div>
         </div>

@@ -168,3 +168,13 @@ export const getTotalNumber = () => {
     API_URL.ADMIN_DASHBORAD.GET_TOTAL_NUMBER
   );
 }
+
+// ==================== AI CHAT ====================
+
+
+export const getAIChatAsk = (data) => {
+  return axiosInstance.post(
+    API_URL.AICHAT.GET_ASK_AI,
+    data
+  );
+}

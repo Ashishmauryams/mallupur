@@ -8,6 +8,8 @@ const Button = ({
 
     height = "60px",
     fontSize = "18px",
+    fontWeight = "700",
+    width = "100%",
 
     background = "#299555",
     hoverBackground = "#238548",
@@ -30,6 +32,8 @@ const Button = ({
             className={`dynamic-button ${className}`}
             style={{
                 "--button-height": height,
+                "--button-width": width,
+                "--button-weight": fontWeight,
                 "--button-font-size": fontSize,
                 "--button-background": background,
                 "--button-hover-background": hoverBackground,

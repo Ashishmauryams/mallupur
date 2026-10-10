@@ -339,7 +339,7 @@ const Complaint = () => {
             <div className="complaints__hero-actions">
               <button
                 className="complaints__button complaints__button--primary"
-                onClick={() => navigate("/home/complaints/create")}
+                onClick={() => navigate("/services/complaint/create")}
               >
                 Report a Problem
                 <ArrowRight size={18} />
@@ -347,7 +347,7 @@ const Complaint = () => {
 
               <button
                 className="complaints__button complaints__button--outline"
-                onClick={() => navigate("/home/complaints/my")}
+                onClick={() => navigate("/services/complaint/my")}
               >
                 View My Complaints
               </button>
@@ -406,7 +406,7 @@ const Complaint = () => {
 
                   <button
                     onClick={() =>
-                      navigate("/home/complaints/create")
+                      navigate("/services/complaint/create")
                     }
                   >
                     Report Issue
@@ -478,7 +478,7 @@ const Complaint = () => {
 
             <button
               className="complaints__button complaints__button--primary"
-              onClick={() => navigate("/home/complaints/create")}
+              onClick={() => navigate("/services/complaint/create")}
             >
               Report a Complaint
               <ArrowRight size={18} />

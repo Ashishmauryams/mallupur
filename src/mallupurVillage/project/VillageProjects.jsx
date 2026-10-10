@@ -225,7 +225,7 @@ const VillageProjects = () => {
                         <div className="projects-page__actions">
 
                             <Link
-                                to="/home/projects/all"
+                                to="/projects/all"
                                 className="projects-page__button projects-page__button--primary"
                             >
                                 View Projects
@@ -340,7 +340,7 @@ const VillageProjects = () => {
                         <div className="projects-page__management-actions">
 
                             <Link
-                                to="/home/projects/all"
+                                to="/projects/all"
                                 className="projects-page__management-link"
                             >
                                 <FolderKanban size={20} />

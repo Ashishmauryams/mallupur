@@ -50,8 +50,8 @@ const AppRoutes = () => {
                         <Route element={<AppLayout />}>
                             <Route path="/home" element={role === "ADMIN" ? <Dashboard /> : <UserDashboard />} />
                             <Route path="/services/complaint" element={<Complaint />} />
-                            <Route path="/services/complaint/register" element={<RegisterComplaint />} />
-                            <Route path="/services/complaint/list" element={<ComplaintList />} />
+                            <Route path="/services/complaint/create" element={<RegisterComplaint />} />
+                            <Route path="/services/complaint/my" element={<ComplaintList />} />
                             <Route path="/services/complaint/details/:id" element={<ComplaintDetails />} />
                             <Route path="/home/profile" element={<Profile />} />
                             <Route path="/home/profile/edit" element={<EditProfile />} />

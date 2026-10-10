@@ -85,6 +85,8 @@ body {
     --gradient-two: #4caf72;
     --box-shadow: 0 5px 20px rgba(15, 40, 70, 0.035);
 
+    --contact-border: var(--border-color, #e5e7eb);
+
 }
 
 .container {
@@ -116,4 +118,10 @@ body {
 
 .sb {
     justify-content: space-between;
+}
+
+.center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

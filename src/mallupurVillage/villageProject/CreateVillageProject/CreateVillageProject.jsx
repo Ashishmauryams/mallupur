@@ -18,6 +18,7 @@ import { getCreateProject, getUpdateProject } from "../../../api/apiService.js";
 import { useAlert } from "../../../contextApi/AlertContext.jsx";
 import { useLocation, useNavigate, useParams } from "react-router";
 import Loader from "../../reuseableCopmonent/loader/Loader.jsx";
+import BackButton from "../../reuseableCopmonent/BackButton/BackButton.jsx";
 
 
 const CreateVillageProject = () => {
@@ -205,22 +206,26 @@ const CreateVillageProject = () => {
     return (
         <div className="create-village-project">
 
-            <div className="create-village-project__header">
-                <div className="create-village-project__header-icon">
-                    <FolderPlus size={26} />
+            <div className="center">
+                <div className="create-village-project__header">
+                    <div className="create-village-project__header-icon">
+                        <FolderPlus size={26} />
+                    </div>
+
+                    <div>
+                        <p className="create-village-project__eyebrow">
+                            VILLAGE PORTAL
+                        </p>
+
+                        <h1>{`${isEditMode ? "Update" : "Create"} Village Project`}</h1>
+
+                        <p>
+                            Add a new development project for your village.
+                        </p>
+                    </div>
                 </div>
 
-                <div>
-                    <p className="create-village-project__eyebrow">
-                        VILLAGE PORTAL
-                    </p>
-
-                    <h1>{`${isEditMode ? "Update" : "Create"} Village Project`}</h1>
-
-                    <p>
-                        Add a new development project for your village.
-                    </p>
-                </div>
+                <BackButton path={"/project"} />
             </div>
 
 

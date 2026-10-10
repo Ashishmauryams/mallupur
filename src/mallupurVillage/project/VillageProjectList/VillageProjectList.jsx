@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import "./VillageProjectList.scss";
 import { getAllProjects } from "../../../api/apiService";
 import Loading from "../../loader/Loading";
+import BackButton from "../../reuseableCopmonent/BackButton/BackButton";
 
 
 const VillageProjectList = () => {
@@ -106,7 +107,7 @@ const VillageProjectList = () => {
 
             {loading ? <Loading borderColor="#000000" /> :
 
-                <div className="container">
+                <div >
                     <section className="village-project-list__header">
 
                         <div className="village-project-list__header-content">
@@ -130,15 +131,7 @@ const VillageProjectList = () => {
 
                         </div>
 
-                        <button
-                            className="village-project-list__create-btn"
-                            onClick={() =>
-                                navigate("/home/project/create")
-                            }
-                        >
-                            <Plus size={18} />
-                            Create Project
-                        </button>
+                        <BackButton path={"/project"}/>
 
                     </section>
 
@@ -224,7 +217,7 @@ const VillageProjectList = () => {
                             <span>project</span>
 
                             <h2>
-                                {filteredproject?.length} project Found
+                                Total Project - {filteredproject?.length}
                             </h2>
                         </div>
 
@@ -265,10 +258,6 @@ const VillageProjectList = () => {
                                         {project?.title}
                                     </h3>
 
-                                    <p className="village-project-list__description">
-                                        {project?.description}
-                                    </p>
-
                                     <div className="village-project-list__info">
 
                                         <div>
@@ -276,16 +265,6 @@ const VillageProjectList = () => {
 
                                             <span>
                                                 {project?.location}
-                                            </span>
-                                        </div>
-
-                                        <div>
-                                            <IndianRupee size={16} />
-
-                                            <span>
-                                                {formatBudget(
-                                                    project?.budget
-                                                )}
                                             </span>
                                         </div>
 
@@ -313,32 +292,6 @@ const VillageProjectList = () => {
                                                     project?.expectedEndDate
                                                 )}
                                             </strong>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="village-project-list__progress">
-
-                                        <div className="village-project-list__progress-heading">
-
-                                            <span>
-                                                Progress
-                                            </span>
-
-                                            <strong>
-                                                {project?.progress}%
-                                            </strong>
-
-                                        </div>
-
-                                        <div className="village-project-list__progress-bar">
-
-                                            <span
-                                                style={{
-                                                    width: `${project?.progress}%`,
-                                                }}
-                                            />
-
                                         </div>
 
                                     </div>

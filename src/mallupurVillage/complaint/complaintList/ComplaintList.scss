@@ -1,571 +1,421 @@
 
 .complaint-list-page {
   min-height: 100vh;
-  background: #f5f7fb;
-  padding: 35px 20px;
+  padding: 35px 0 65px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+
+  // Back button
+  &__back {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 22px;
+  }
+
+  // Page header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding: 30px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--box-shadow);
+  }
+
+  &__heading-content {
+    min-width: 0;
+
+    h1 {
+      margin: 10px 0;
+      font-size: clamp(27px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.7px;
+    }
+
+    p {
+      max-width: 580px;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+  }
+
+  &__eyebrow {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+  }
+
+  // Complaint count
+  &__count {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-shrink: 0;
+    padding: 15px 20px;
+    background: var(--primary-soft);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    strong {
+      display: block;
+      color: var(--primary);
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    div>span {
+      display: block;
+      margin-top: 3px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  &__count-icon {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 11px;
+  }
+
+  // Complaint cards grid
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  // Loading
+  &__loader {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+  }
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--primary-light);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: complaint-list-spin 0.8s linear infinite;
+  }
+
+  // Error and empty states
+  &__error,
+  &__empty {
+    padding: 45px 25px;
+    text-align: center;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--box-shadow);
+
+    h2 {
+      margin: 18px 0 10px;
+      font-size: 23px;
+    }
+
+    p {
+      max-width: 480px;
+      margin: 0 auto 22px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+  }
+
+  &__empty-icon,
+  &__error-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 18px;
+  }
+
+  &__error-icon {
+    color: var(--error);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  &__primary-btn {
+    min-height: 44px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--button-bg);
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: var(--button-hover);
+    }
+  }
+
+  // Responsive
+  @media (max-width: 850px) {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    padding: 22px 0 45px;
+
+    &__header {
+      align-items: stretch;
+      flex-direction: column;
+      padding: 22px;
+      gap: 20px;
+    }
+
+    &__heading-content {
+      h1 {
+        font-size: 28px;
+      }
+    }
+
+    &__count {
+      justify-content: flex-start;
+    }
+
+    &__empty,
+    &__error {
+      padding: 35px 18px;
+    }
+  }
 }
 
-.page-header {
-  background: #ffffff;
-  border: 1px solid #e8ebf0;
-  border-radius: 18px;
-  padding: 28px 30px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
-  margin-bottom: 22px;
-}
-
-.page-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  color: #667085;
-}
-
-.page-header h1 {
-  margin: 6px 0 5px;
-
-  font-size: 24px;
-  font-weight: 700;
-  color: #172033;
-}
-
-.page-header p {
-  margin: 0;
-
-  color: #667085;
-  font-size: 14px;
-}
-
-
-.complaint-count {
-  min-width: 100px;
-
-  padding: 15px 20px;
-
-  background: #f8f9fc;
-  border: 1px solid #eaecf0;
-  border-radius: 12px;
-
-  text-align: center;
-}
-
-.complaint-count strong {
-  display: block;
-
-  font-size: 25px;
-  color: #172033;
-}
-
-.complaint-count span {
-  font-size: 12px;
-  color: #667085;
-}
-
-
-
-.complaint-list {
+// Individual complaint card
+.complaint-card {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-.complaint-card {
-  background: #ffffff;
-
-  border: 1px solid #e8ebf0;
-  border-radius: 18px;
-
-  padding: 24px;
-
+  padding: 23px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
   transition:
     transform 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.2s ease;
+
+  &:hover {
+    //transform: translateY(-3px);
+    border-color: var(--button-border);
+    box-shadow: var(--button-shadow);
+  }
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  &__identity {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  &__id {
+    padding: 5px 9px;
+    color: var(--primary);
+    background: var(--primary-light);
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  &__category {
+    padding: 5px 9px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 650;
+  }
+
+  // Status badge
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+
+    &-dot {
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      background: var(--text-muted);
+      border-radius: 50%;
+    }
+
+    &--reported,
+    &--pending,
+    &--in-progress {
+      color: var(--primary);
+      background: var(--primary-soft);
+
+      .complaint-card__status-dot {
+        background: var(--primary);
+      }
+    }
+
+    &--resolved,
+    &--completed {
+      color: var(--success);
+      background: var(--primary-light);
+
+      .complaint-card__status-dot {
+        background: var(--success);
+      }
+    }
+
+    &--rejected,
+    &--closed {
+      color: var(--error);
+
+      .complaint-card__status-dot {
+        background: var(--error);
+      }
+    }
+  }
+
+  // Short description
+  &__body {
+    flex: 1;
+    padding: 19px 0 22px;
+
+    h2 {
+      margin: 0 0 10px;
+      color: var(--text-primary);
+      font-size: 19px;
+      font-weight: 750;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    p {
+      display: -webkit-box;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  // Card footer
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  &__footer-note {
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+
+  &__view-btn {
+    min-height: 39px;
+    padding: 0 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--button-bg);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      gap 0.2s ease;
+
+    &:hover {
+      background: var(--button-hover);
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    padding: 17px;
+
+    &__footer {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    &__view-btn {
+      width: 100%;
+    }
+  }
 }
 
-.complaint-card:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 25px rgba(16, 24, 40, 0.07);
-}
-
-/* ================= CARD TOP ================= */
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  gap: 20px;
-}
-
-.complaint-title-section {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.complaint-number {
-  min-width: 43px;
-  height: 43px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 10px;
-
-  background: #f2f4f7;
-
-  font-size: 13px;
-  font-weight: 700;
-  color: #475467;
-}
-
-.category {
-  font-size: 11px;
-  font-weight: 700;
-  color: #667085;
-
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-}
-
-.complaint-title-section h2 {
-  margin: 3px 0 0;
-
-  font-size: 18px;
-  color: #172033;
-  font-weight: 650;
-}
-
-/* ================= STATUS ================= */
-
-.status-badge {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-
-  padding: 8px 13px;
-
-  border-radius: 20px;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  text-transform: capitalize;
-  white-space: nowrap;
-}
-
-.status-badge span {
-  width: 7px;
-  height: 7px;
-
-  border-radius: 50%;
-
-  background: currentColor;
-}
-
-.status-badge.reported {
-  background: #fff4e5;
-  color: #b54708;
-}
-
-.status-badge.pending {
-  background: #fff4e5;
-  color: #b54708;
-}
-
-.status-badge.in_progress {
-  background: #eef4ff;
-  color: #175cd3;
-}
-
-.status-badge.resolved {
-  background: #ecfdf3;
-  color: #027a48;
-}
-
-.status-badge.closed {
-  background: #f2f4f7;
-  color: #475467;
-}
-
-/* ================= DESCRIPTION ================= */
-
-.description {
-  margin: 20px 0;
-
-  color: #475467;
-
-  font-size: 14px;
-  line-height: 1.6;
-
-  max-width: 850px;
-}
-
-/* ================= DETAILS ================= */
-
-.complaint-details {
-  display: grid;
-
-  grid-template-columns:
-    minmax(200px, 1.5fr)
-    minmax(130px, 0.7fr)
-    minmax(150px, 0.8fr);
-
-  gap: 12px;
-
-  margin-bottom: 20px;
-}
-
-.detail {
-  display: flex;
-  align-items: center;
-
-  gap: 11px;
-
-  padding: 13px;
-
-  background: #f8f9fc;
-
-  border-radius: 10px;
-}
-
-.detail-icon {
-  width: 32px;
-  height: 32px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 8px;
-
-  background: #ffffff;
-
-  font-size: 14px;
-}
-
-.detail label {
-  display: block;
-
-  margin-bottom: 3px;
-
-  font-size: 10px;
-  font-weight: 600;
-
-  color: #98a2b3;
-
-  text-transform: uppercase;
-}
-
-.detail p {
-  margin: 0;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  color: #344054;
-
-  line-height: 1.4;
-}
-
-.priority {
-  font-weight: 700 !important;
-}
-
-.priority.low {
-  color: #027a48 !important;
-}
-
-.priority.medium {
-  color: #b54708 !important;
-}
-
-.priority.high {
-  color: #d92d20 !important;
-}
-
-.priority.critical {
-  color: #b42318 !important;
-}
-
-/* ================= BOTTOM ================= */
-
-.card-bottom {
-  padding-top: 17px;
-
-  border-top: 1px solid #eaecf0;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-}
-
-.reported-by {
-  font-size: 12px;
-  color: #98a2b3;
-}
-
-.reported-by strong {
-  color: #475467;
-}
-
-/* ================= BUTTON ================= */
-
-.view-button {
-  border: none;
-  background: transparent;
-
-  color: #344054;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  gap: 7px;
-
-  padding: 5px;
-}
-
-.view-button span {
-  font-size: 17px;
-
-  transition: transform 0.2s ease;
-}
-
-.view-button:hover span {
-  transform: translateX(4px);
-}
-
-/* ================= EMPTY ================= */
-
-.empty-state {
-  background: #ffffff;
-
-  border: 1px solid #e8ebf0;
-  border-radius: 18px;
-
-  padding: 70px 20px;
-
-  text-align: center;
-}
-
-.empty-icon {
-  width: 60px;
-  height: 60px;
-
-  margin: 0 auto 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #f2f4f7;
-
-  font-size: 25px;
-}
-
-.empty-state h2 {
-  margin: 0 0 8px;
-
-  font-size: 20px;
-  color: #172033;
-}
-
-.empty-state p {
-  margin: 0 0 20px;
-
-  color: #667085;
-  font-size: 14px;
-}
-
-.empty-state button,
-.complaint-error button {
-  border: none;
-
-  background: #172033;
-  color: #ffffff;
-
-  padding: 11px 18px;
-
-  border-radius: 9px;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-/* ================= LOADER ================= */
-
-.complaint-loader {
-  min-height: 400px;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  color: #667085;
-}
-
-.loader {
-  width: 38px;
-  height: 38px;
-
-  border: 3px solid #e4e7ec;
-  border-top-color: #344054;
-
-  border-radius: 50%;
-
-  animation: spin 0.8s linear infinite;
-
-  margin-bottom: 14px;
-}
-
-@keyframes spin {
+@keyframes complaint-list-spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* ================= ERROR ================= */
-
-.complaint-error {
-  background: #ffffff;
-
-  max-width: 450px;
-
-  margin: 60px auto;
-
-  padding: 40px 25px;
-
-  border: 1px solid #eaecf0;
-  border-radius: 18px;
-
-  text-align: center;
-}
-
-.error-icon {
-  width: 50px;
-  height: 50px;
-
-  margin: 0 auto 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #fef3f2;
-
-  color: #d92d20;
-
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.complaint-error h3 {
-  margin: 0 0 8px;
-
-  color: #172033;
-}
-
-.complaint-error p {
-  margin: 0 0 20px;
-
-  color: #667085;
-
-  font-size: 14px;
-}
-
-/* ================= TABLET ================= */
-
-@media (max-width: 800px) {
-  .complaint-details {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .detail:first-child {
-    grid-column: 1 / -1;
-  }
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 600px) {
-  .complaint-list-page {
-    padding: 20px 12px;
-  }
-
-  .page-header {
-    padding: 22px;
-
-    align-items: flex-start;
-  }
-
-  .page-header h1 {
-    font-size: 24px;
-  }
-
-  .complaint-count {
-    display: none;
-  }
-
-  .complaint-card {
-    padding: 18px;
-  }
-
-  .card-top {
-    flex-direction: column;
-  }
-
-  .status-badge {
-    align-self: flex-start;
-  }
-
-  .complaint-title-section h2 {
-    font-size: 16px;
-  }
-
-  .complaint-details {
-    grid-template-columns: 1fr;
-  }
-
-  .detail:first-child {
-    grid-column: auto;
-  }
-
-  .card-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .view-button {
-    width: 100%;
-
-    justify-content: center;
-
-    background: #f2f4f7;
-
-    padding: 10px;
-
-    border-radius: 8px;
   }
 }
