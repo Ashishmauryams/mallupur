@@ -40,21 +40,12 @@
         rgba(0, 0, 0, 0.5) 100%);
   }
 
-  // =========================
-  // BRAND
-  // =========================
 
-  // &__brand {
-  //   position: relative;
-  //   z-index: 2;
-  //   text-align: center;
-  //   top: -180px;
-  // }
   &__brand {
     position: relative;
     z-index: 2;
     text-align: center;
-    top: -170px;
+    top: -20%;
     margin: 0;
   }
 
@@ -113,18 +104,7 @@
     backdrop-filter: blur(8px);
   }
 
-  // =========================
-  // RIGHT SIDE
-  // =========================
 
-  // &__form-area {
-  //   height: 100vh;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   padding: 45px;
-  //   overflow-y: auto;
-  // }
   &__form-area {
     height: 100%;
     min-height: 0;
@@ -139,14 +119,6 @@
     overflow: hidden;
   }
 
-  // &__card {
-  //   width: 100%;
-  //   max-width: 700px;
-  //   padding: 48px 45px;
-  //   background: rgba(255, 255, 255, 0.95);
-  //   border-radius: 24px;
-  //   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
-  // }
   &__card {
     width: 100%;
     max-width: 700px;
@@ -294,7 +266,6 @@
       width: 48px;
       height: 48px;
     }
-
     &__brand h1 {
       font-size: 45px;
     }
@@ -316,11 +287,9 @@
       height: 250px;
     }
 
-    // &__brand {
-    //   margin-top: -5px;
-    // }
+    
     &__brand {
-      top: 0;
+      top: -18%;
       margin: 0;
     }
 
@@ -344,10 +313,6 @@
       display: none;
     }
 
-    // &__form-area {
-    //   min-height: auto;
-    //   padding: 25px 16px 35px;
-    // }
     &__form-area {
       height: auto;
       min-height: 0;
@@ -355,12 +320,6 @@
       overflow: visible;
     }
 
-    // &__card {
-    //   max-width: 100%;
-    //   padding: 30px 20px;
-    //   border-radius: 20px;
-    //   box-shadow: none;
-    // }
     &__card {
       max-width: 100%;
       max-height: none;
@@ -393,6 +352,10 @@
     &__visual {
       min-height: 220px;
       height: 220px;
+    }
+
+    &__brand{
+      top: -13%;
     }
 
     &__brand h1 {

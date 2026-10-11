@@ -163,8 +163,8 @@ const AppHeader = () => {
                                 All Schemes
                             </NavLink>
 
-                            <NavLink to="/schemes/farmer">
-                                Farmer Schemes
+                            <NavLink to="/schemes/links">
+                                Important Links
                             </NavLink>
 
                             <NavLink to="/schemes/housing">

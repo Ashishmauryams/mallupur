@@ -28,6 +28,7 @@ const ForgotPassword = lazy(() => import('../mallupurVillage/ForgotPassword/Forg
 const UserList = lazy(() => import('../mallupurVillage/user/UserList.jsx'));
 const UserDetails = lazy(() => import('../mallupurVillage/user/UserDetail/UserDetails.jsx'));
 const NotFoundGlobal = lazy(() => import('../mallupurVillage/NotFoundGlobal/NotFoundGlobal.jsx'));
+const ImpLink = lazy(() => import('../mallupurVillage/importantLink/ImpLink.jsx'));
 
 
 const AppRoutes = () => {
@@ -64,6 +65,9 @@ const AppRoutes = () => {
 
                             <Route path="/services/users" element={role === "ADMIN" && <UserList />} />
                             <Route path="/user/details/:id" element={role === "ADMIN" && <UserDetails />} />
+
+
+                            <Route path="/schemes/links" element={<ImpLink />} />
 
 
                             <Route path="/about" element={<AboutVillage />} />

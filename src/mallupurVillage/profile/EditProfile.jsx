@@ -500,10 +500,8 @@ const EditProfile = () => {
         try {
             setLoading(true);
 
-            // IMPORTANT: FormData ka alag variable
             const multipartData = new FormData();
 
-            // User details state se aayengi
             const userData = {
                 fullName: profileForm.fullName,
                 username: profileForm.username,
@@ -511,13 +509,11 @@ const EditProfile = () => {
                 phone: profileForm.phone,
             };
 
-            // Backend @RequestPart("user") ke liye
             multipartData.append(
                 "user",
                 JSON.stringify(userData)
             );
 
-            // Sirf original File bhejni hai
             if (imageFile) {
                 multipartData.append(
                     "profileImage",
@@ -525,21 +521,9 @@ const EditProfile = () => {
                 );
             }
 
-            console.log("data", multipartData);
-
-            console.log("FormData entries:");
-
-for (const [key, value] of multipartData.entries()) {
-    console.log(
-        key,
-        value instanceof File
-            ? `File: ${value.name}, ${value.size} bytes`
-            : value
-    );
-}
-
-            // API call
             const resp = await getUpdateUser(multipartData);
+
+            console.log("resp", resp);
 
             if (resp?.status === 200) {
                 showAlert({
