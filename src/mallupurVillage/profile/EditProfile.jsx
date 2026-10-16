@@ -607,9 +607,6 @@ const EditProfile = () => {
 
                 <div className="edit-profile-page__header">
                     <div>
-                        <span className="edit-profile-page__subtitle">
-                            My Account
-                        </span>
 
                         <h1 className="edit-profile-page__title">
                             Edit Profile

@@ -16,3 +16,4 @@ export const formatDateTime = (date) => {
         hour12: true,
     });
 };
+

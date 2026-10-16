@@ -1,0 +1,127 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #f1f5f9; // Aapka background color
+
+    /* 1. Header Styling */
+    .app-header {
+        height: 70px; // Apne header ki height ke hisab se adjust karein
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        background: var(--bg-primary);
+        border-bottom: 1px solid #e2e8f0;
+        z-index: 100;
+    }
+
+    @media (max-width: 768px) {
+        .app-header {
+            padding: 0 12px;
+            gap: 8px;
+
+            .header-brand {
+                display: none;
+                /* Mobile screen chhoti hone par brand text hide kiya ja sakta hai */
+            }
+
+            .header-search {
+                max-width: none;
+                margin: 0 8px;
+
+                input[type="search"] {
+                    padding-left: 12px;
+                    background-image: none;
+                    /* Mobile pe search icon hata sakte hain space bachane ke liye */
+                }
+            }
+
+            .header-user {
+                gap: 10px;
+
+                .center_1 .user {
+                    display: none;
+                    /* Sirf avatar dikhega mobile pe */
+                }
+
+                >div:last-child {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    /* 2. App Body (Sidebar aur Right area ka container) */
+    .app-body {
+        display: flex;
+        flex: 1;
+        height: calc(100vh - 70px); // Header ki height minus karke baaki poori height
+        overflow: hidden;
+        position: relative;
+
+        
+        /* Sidebar Fix Styling */
+        aside {
+            height: 100%;
+            flex-shrink: 0;
+            overflow-y: auto; // Agar sidebar ke andar items zyada hain to wo alag se scroll ho sakega
+            transition: width 0.3s ease;
+        }
+
+        /* 3. Main Content + Footer Wrapper (Ye scroll hoga) */
+        .main-content-wrapper {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; // **Yehi wo magic scroll hai jo aap chahte thay!**
+
+            .app-main {
+                flex: 1 0 auto; // Content ko push karega taaki footer niche jaye
+                padding: 24px;
+            }
+        }
+    }
+}
+
+
+/* Mobile Responsive Handling */
+@media (max-width: 768px) {
+    .app-body {
+        aside {
+            position: fixed;
+            left: -260px; // Default hidden on mobile
+            z-index: 1000;
+            transition: left 0.3s ease;
+        }
+    }
+
+    .app-layout.mobile-sidebar-open {
+        .app-body aside {
+            left: 0; // Mobile khulne par saamne aa jaye
+        }
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        border: none;
+    }
+}

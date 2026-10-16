@@ -1,541 +1,335 @@
+
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
-    Box, Card, CardContent, Typography, Grid, Chip, Table,
-    TableBody, TableCell, TableContainer, TableHead, TableRow,
-} from "@mui/material";
-import { LineChart, BarChart, PieChart, } from "@mui/x-charts";
-import { People, ReportProblemOutlined, CheckCircle, PendingActions } from "@mui/icons-material";
-
+  FileText,
+  MessageSquare,
+  Sprout,
+  FolderKanban,
+  Pencil,
+  Calendar,
+  ArrowRight,
+  CheckCircle2,
+  Clock,
+  Layers,
+  Mail,
+  Phone,
+  MapPin,
+  Eye
+} from "lucide-react";
 import "./Dashboard.scss";
-import { getTotalNumber } from "../../api/apiService";
+import { getUserProfile } from "../../api/apiService";
+import { useAuth } from "../../contextApi/AuthContext";
 import Loader from "../reuseableCopmonent/loader/Loader";
-
-
-const userData = [
-    { month: "Jan", users: 40 },
-    { month: "Feb", users: 65 },
-    { month: "Mar", users: 85 },
-    { month: "Apr", users: 110 },
-    { month: "May", users: 145 },
-    { month: "Jun", users: 180 },
-    { month: "Jul", users: 210 },
-    { month: "Aug", users: 250 },
-];
-
-
-const complaintData = [
-    { month: "Jan", complaints: 12 },
-    { month: "Feb", complaints: 18 },
-    { month: "Mar", complaints: 15 },
-    { month: "Apr", complaints: 28 },
-    { month: "May", complaints: 22 },
-    { month: "Jun", complaints: 35 },
-    { month: "Jul", complaints: 30 },
-    { month: "Aug", complaints: 42 },
-];
-
-
-const recentComplaints = [
-    {
-        id: 1,
-        user: "Rahul Maurya",
-        category: "Water",
-        status: "Pending",
-        date: "10 Sep 2026",
-    },
-    {
-        id: 2,
-        user: "Amit Kumar",
-        category: "Road",
-        status: "Resolved",
-        date: "09 Sep 2026",
-    },
-    {
-        id: 3,
-        user: "Pooja Singh",
-        category: "Street Light",
-        status: "In Progress",
-        date: "09 Sep 2026",
-    },
-    {
-        id: 4,
-        user: "Ravi Yadav",
-        category: "Electricity",
-        status: "Resolved",
-        date: "08 Sep 2026",
-    },
-    {
-        id: 5,
-        user: "Anjali Verma",
-        category: "Sanitation",
-        status: "Pending",
-        date: "08 Sep 2026",
-    },
-];
-
-
-const getStatusColor = (status) => {
-    switch (status) {
-        case "Resolved":
-            return "success";
-
-        case "Pending":
-            return "warning";
-
-        case "In Progress":
-            return "info";
-
-        default:
-            return "default";
-    }
-};
-
+import Loading from "../loader/Loading";
 
 const Dashboard = () => {
 
-    const [loading, setLoading] = useState(false);
-    const [totalData, setTotalData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState({});
 
-    useEffect(() => {
-        fetchTotalData();
-    }, []);
 
-    const fetchTotalData = async () => {
+  const { user } = useAuth();
 
-        try {
-            setLoading(true);
+  useEffect(() => {
+    fetchUsersProfile();
+  }, []);
 
-            const resp = await getTotalNumber();
+  const fetchUsersProfile = async () => {
+    try {
+      setLoading(true);
+      const resp = await getUserProfile();
+      if (resp?.status === 200 && resp?.data) {
+        setUserData(resp?.data);
+      }
 
-            if (resp?.status === 200) {
-                setTotalData(resp?.data);
-            }
-
-        } catch (err) {
-            console.log("eer", err);
-        } finally {
-            setLoading(false);
-        }
+    } catch (err) {
+      console.log("err----", err);
+    } finally {
+      setLoading(false);
     }
-
-
-    return (
-        <Box className="dashboard">
-
-            {/* Header */}
-
-            <Box className="dashboard-header">
-
-                <Box>
-                    <Typography
-                        variant="h4"
-                        className="dashboard-title"
-                    >
-                        Dashboard
-                    </Typography>
-
-                    <Typography
-                        variant="body2"
-                        className="dashboard-subtitle"
-                    >
-                        Welcome back, Admin. Here's what's happening
-                        in your village.
-                    </Typography>
-                </Box>
-
-                <Typography className="dashboard-date">
-                    10 September 2026
-                </Typography>
-
-            </Box>
-
-
-            {/* Summary Cards */}
-
-            <Grid container spacing={2.5} className="stats-grid">
-
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Card className="stat-card">
-                        {loading ? <div className="dashLoader"><Loader /></div> :
-                            <CardContent>
-
-                                <Box className="stat-top">
-                                    <Box className="stat-icon">
-                                        <People />
-                                    </Box>
-
-                                    <Typography className="stat-growth">
-                                        +12.5%
-                                    </Typography>
-                                </Box>
-
-                                <Typography className="stat-value">
-                                    {totalData?.totalUsers}
-                                </Typography>
-
-                                <Typography className="stat-label">
-                                    Total Users
-                                </Typography>
-
-                            </CardContent>
-                        }
-                    </Card>
-                </Grid>
-
-
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Card className="stat-card">
-                        {loading ? <div className="dashLoader"><Loader /></div> :
-                            <CardContent>
-
-                                <Box className="stat-top">
-                                    <Box className="stat-icon">
-                                        <ReportProblemOutlined />
-                                    </Box>
-
-                                    <Typography className="stat-growth">
-                                        +8.2%
-                                    </Typography>
-                                </Box>
-
-                                <Typography className="stat-value">
-                                    {totalData?.totalProblems}
-                                </Typography>
-
-                                <Typography className="stat-label">
-                                    Total Complaints
-                                </Typography>
-
-                            </CardContent>
-                        }
-                    </Card>
-                </Grid>
-
-
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Card className="stat-card">
-                        {loading ? <div className="dashLoader"><Loader /></div> :
-                            <CardContent>
-
-                                <Box className="stat-top">
-                                    <Box className="stat-icon">
-                                        <PendingActions />
-                                    </Box>
-
-                                    <Typography className="stat-growth warning">
-                                        24
-                                    </Typography>
-                                </Box>
-
-                                <Typography className="stat-value">
-                                    {totalData?.pendingProblems}
-                                </Typography>
-
-                                <Typography className="stat-label">
-                                    Pending Complaints
-                                </Typography>
-
-                            </CardContent>
-                        }
-                    </Card>
-                </Grid>
-
-
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Card className="stat-card">
-                        {loading ? <div className="dashLoader"><Loader /></div> :
-                            <CardContent>
-
-                                <Box className="stat-top">
-                                    <Box className="stat-icon">
-                                        <CheckCircle />
-                                    </Box>
-
-                                    <Typography className="stat-growth">
-                                        72.1%
-                                    </Typography>
-                                </Box>
-
-                                <Typography className="stat-value">
-                                    {totalData?.resolvedProblems}
-                                </Typography>
-
-                                <Typography className="stat-label">
-                                    Resolved Complaints
-                                </Typography>
-
-                            </CardContent>
-                        }
-                    </Card>
-                </Grid>
-
-            </Grid>
-
-
-            {/* Charts */}
-
-            <Grid container spacing={2.5} className="charts-grid">
-
-                {/* User Growth */}
-
-                <Grid size={{ xs: 12, md: 8 }}>
-                    <Card className="chart-card">
-
-                        <CardContent>
-
-                            <Box className="chart-header">
-
-                                <Box>
-                                    <Typography className="chart-title">
-                                        User Registration
-                                    </Typography>
-
-                                    <Typography className="chart-subtitle">
-                                        Monthly user growth
-                                    </Typography>
-                                </Box>
-
-                                <Chip
-                                    label="This Year"
-                                    size="small"
-                                />
-
-                            </Box>
-
-
-                            <LineChart
-                                xAxis={[
-                                    {
-                                        scaleType: "point",
-                                        data: userData.map(
-                                            item => item.month
-                                        ),
-                                    },
-                                ]}
-                                series={[
-                                    {
-                                        data: userData.map(
-                                            item => item.users
-                                        ),
-                                        label: "Users",
-                                        area: true,
-                                    },
-                                ]}
-                                height={320}
-                                margin={{
-                                    left: 50,
-                                    right: 20,
-                                    top: 30,
-                                    bottom: 30,
-                                }}
-                                grid={{
-                                    horizontal: true,
-                                }}
-                            />
-
-                        </CardContent>
-
-                    </Card>
-                </Grid>
-
-
-                {/* Complaint Status */}
-
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Card className="chart-card">
-
-                        <CardContent>
-
-                            <Typography className="chart-title">
-                                Complaint Status
-                            </Typography>
-
-                            <Typography className="chart-subtitle">
-                                Current complaint overview
-                            </Typography>
-
-
-                            <PieChart
-                                series={[
-                                    {
-                                        data: [
-                                            {
-                                                id: 0,
-                                                value: 24,
-                                                label: "Pending",
-                                            },
-                                            {
-                                                id: 1,
-                                                value: 20,
-                                                label: "In Progress",
-                                            },
-                                            {
-                                                id: 2,
-                                                value: 42,
-                                                label: "Resolved",
-                                            },
-                                        ],
-                                        innerRadius: 55,
-                                        outerRadius: 105,
-                                        paddingAngle: 3,
-                                    },
-                                ]}
-                                height={300}
-                            />
-
-                        </CardContent>
-
-                    </Card>
-                </Grid>
-
-
-                {/* Monthly Complaints */}
-
-                <Grid size={{ xs: 12 }}>
-                    <Card className="chart-card">
-
-                        <CardContent>
-
-                            <Typography className="chart-title">
-                                Monthly Complaints
-                            </Typography>
-
-                            <Typography className="chart-subtitle">
-                                Complaint activity over the last 8 months
-                            </Typography>
-
-
-                            <BarChart
-                                xAxis={[
-                                    {
-                                        scaleType: "band",
-                                        data: complaintData.map(
-                                            item => item.month
-                                        ),
-                                    },
-                                ]}
-                                series={[
-                                    {
-                                        data: complaintData.map(
-                                            item => item.complaints
-                                        ),
-                                        label: "Complaints",
-                                    },
-                                ]}
-                                height={320}
-                                grid={{
-                                    horizontal: true,
-                                }}
-                                margin={{
-                                    left: 50,
-                                    right: 20,
-                                    top: 30,
-                                    bottom: 30,
-                                }}
-                            />
-
-                        </CardContent>
-
-                    </Card>
-                </Grid>
-
-            </Grid>
-
-
-            {/* Recent Complaints */}
-
-            <Card className="table-card">
-
-                <CardContent>
-
-                    <Box className="table-header">
-
-                        <Box>
-                            <Typography className="chart-title">
-                                Recent Complaints
-                            </Typography>
-
-                            <Typography className="chart-subtitle">
-                                Latest complaints submitted by villagers
-                            </Typography>
-                        </Box>
-
-                    </Box>
-
-
-                    <TableContainer>
-
-                        <Table>
-
-                            <TableHead>
-                                <TableRow>
-
-                                    <TableCell>
-                                        User
-                                    </TableCell>
-
-                                    <TableCell>
-                                        Category
-                                    </TableCell>
-
-                                    <TableCell>
-                                        Status
-                                    </TableCell>
-
-                                    <TableCell>
-                                        Date
-                                    </TableCell>
-
-                                </TableRow>
-                            </TableHead>
-
-
-                            <TableBody>
-
-                                {recentComplaints.map((complaint) => (
-
-                                    <TableRow key={complaint.id}>
-
-                                        <TableCell>
-                                            {complaint.user}
-                                        </TableCell>
-
-                                        <TableCell>
-                                            {complaint.category}
-                                        </TableCell>
-
-                                        <TableCell>
-
-                                            <Chip
-                                                label={complaint.status}
-                                                color={getStatusColor(
-                                                    complaint.status
-                                                )}
-                                                size="small"
-                                            />
-
-                                        </TableCell>
-
-                                        <TableCell>
-                                            {complaint.date}
-                                        </TableCell>
-
-                                    </TableRow>
-
-                                ))}
-
-                            </TableBody>
-
-                        </Table>
-
-                    </TableContainer>
-
-                </CardContent>
-
-            </Card>
-
-        </Box>
-    );
+  }
+
+
+
+  return (
+    <div className="dashboard-content">
+      {/* 1. Hero Banner */}
+      <section className="dashboard-hero">
+        <div className="dashboard-hero__text">
+          <span className="dashboard-hero__greeting">Good Morning ☀️</span>
+          <h1>Welcome back, <span>Sangam!</span></h1>
+          <p>Let's build a better Mallupur together. Manage your complaints, explore government schemes and stay updated with village development.</p>
+        </div>
+        <div className="dashboard-hero__date-badge">
+          <Calendar size={18} />
+          <div>
+            <strong>
+              {new Date().toLocaleDateString("en-GB", {
+                weekday: "long",
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </strong>
+            <span>Mallupur Village, India</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Quick Action Cards */}
+      <div className="dashboard-quick-actions">
+        <Link to="/services/complaint/create" className="quick-card primary-light">
+          <div className="quick-card__icon">
+            <FileText size={40} />
+          </div>
+          <div>
+            <h3>Raise a Complaint</h3>
+            <p>Report issues in your village</p>
+          </div>
+          <ArrowRight size={18} className="quick-card__arrow" />
+        </Link>
+
+        <Link to="/services/complaint/my" className="quick-card">
+          <div className="quick-card__icon blue">
+            <MessageSquare size={40} />
+          </div>
+          <div>
+            <h3>Track My Requests</h3>
+            <p>Check status of your complaints</p>
+          </div>
+          <ArrowRight size={18} className="quick-card__arrow" />
+        </Link>
+
+        <Link to="/schemes/links" className="quick-card">
+          <div className="quick-card__icon yellow">
+            <Sprout size={40} />
+          </div>
+          <div>
+            <h3>Explore Schemes</h3>
+            <p>Discover government schemes</p>
+          </div>
+          <ArrowRight size={18} className="quick-card__arrow" />
+        </Link>
+
+        <Link to="/project/all" className="quick-card">
+          <div className="quick-card__icon purple">
+            <FolderKanban size={40} />
+          </div>
+          <div>
+            <h3>Village Projects</h3>
+            <p>View ongoing projects</p>
+          </div>
+          <ArrowRight size={18} className="quick-card__arrow" />
+        </Link>
+      </div>
+
+      {/* 3. Middle Section: Profile, Activity, News */}
+      <div className="dashboard-grid-middle">
+        {/* My Profile Card */}
+      {loading ? <Loading borderColor="#000000" height="50%"/> : 
+        <div className="dashboard-card profile-card">
+          <div className="card-header">
+            <h3>My Profile</h3>
+            <Link to="/home/profile/edit" className="edit-btn">
+              <Pencil size={14} /> Edit Profile
+            </Link>
+          </div>
+          <div className="profile-user-info">
+            <img
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80"
+              alt="Sangam"
+              className="profile-avatar"
+            />
+            <div>
+              <h4>{userData?.fullName}</h4>
+              <span className="badge-verified">Verified Citizen</span>
+              <p className="user-role">{userData?.role}</p>
+            </div>
+          </div>
+          <div className="profile-contact-list">
+            <div className="contact-item">
+              <Mail size={16} />
+              <div>
+                <span className="label">Email Address</span>
+                <strong>{userData?.email}</strong>
+              </div>
+            </div>
+            <div className="contact-item">
+              <Phone size={16} />
+              <div>
+                <span className="label">Mobile Number</span>
+                <strong>{userData?.phone}</strong>
+              </div>
+            </div>
+            <div className="contact-item">
+              <MapPin size={16} />
+              <div>
+                <span className="label">Village</span>
+                <strong>Mallupur Village</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+        {/* My Activity Overview */}
+        <div className="dashboard-card activity-card">
+          <div className="card-header">
+            <h3>My Activity Overview</h3>
+            <select className="month-select">
+              <option>This Month</option>
+            </select>
+          </div>
+          <div className="activity-grid">
+            <div className="activity-box">
+              <div className="box-top">
+                <span className="icon-wrap green"><FileText size={22} /></span>
+                <span className="trend-up">↑ +1</span>
+              </div>
+              <h2>02</h2>
+              <p>Total Complaints</p>
+              <div className="progress-bar-wrap">
+                <div className="progress-bar" style={{ width: "100%" }}></div>
+              </div>
+              <span className="sub-text">Out of 5 this month</span>
+            </div>
+
+            <div className="activity-box">
+              <div className="box-top">
+                <span className="icon-wrap success"><CheckCircle2 size={22} /></span>
+                <span className="percentage">50%</span>
+              </div>
+              <h2>01</h2>
+              <p>Resolved</p>
+              <div className="progress-bar-wrap">
+                <div className="progress-bar success" style={{ width: "50%" }}></div>
+              </div>
+              <span className="sub-text">50% resolved</span>
+            </div>
+
+            <div className="activity-box">
+              <div className="box-top">
+                <span className="icon-wrap warning"><Clock size={22} /></span>
+                <span className="percentage">50%</span>
+              </div>
+              <h2>01</h2>
+              <p>In Progress</p>
+              <div className="progress-bar-wrap">
+                <div className="progress-bar warning" style={{ width: "50%" }}></div>
+              </div>
+              <span className="sub-text">50% in progress</span>
+            </div>
+
+            <div className="activity-box">
+              <div className="box-top">
+                <span className="icon-wrap purple"><Layers size={22} /></span>
+                <span className="trend-up">+2</span>
+              </div>
+              <h2>04</h2>
+              <p>Services Used</p>
+              <div className="progress-bar-wrap">
+                <div className="progress-bar purple" style={{ width: "80%" }}></div>
+              </div>
+              <span className="sub-text">Across all services</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Village News & Updates */}
+        <div className="dashboard-card news-card">
+          <div className="card-header">
+            <h3>Village News & Updates</h3>
+            <Link to="/home/news" className="view-all">View all →</Link>
+          </div>
+          <div className="news-list">
+            <div className="news-item">
+              <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=80&q=80" alt="News" />
+              <div>
+                <strong>New LED Streetlights Installed</strong>
+                <span>12 Oct 2026</span>
+                <p>LED streetlights have been installed in Ward 3 to improve safety.</p>
+              </div>
+            </div>
+            <div className="news-item">
+              <img src="https://images.unsplash.com/photo-1541888946425-d0fbb18f86f8?auto=format&fit=crop&w=80&q=80" alt="News" />
+              <div>
+                <strong>Water Supply Schedule Updated</strong>
+                <span>10 Oct 2026</span>
+                <p>New water supply timing is now available for all wards.</p>
+              </div>
+            </div>
+            <div className="news-item">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=80&q=80" alt="News" />
+              <div>
+                <strong>Upcoming Health Camp</strong>
+                <span>08 Oct 2026</span>
+                <p>Free health checkup camp next Sunday at Primary School.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. Recent Complaints Table */}
+      <div className="dashboard-card complaints-card">
+        <div className="card-header">
+          <h3>Recent Complaints</h3>
+          <Link to="/home/complaints" className="view-all">View all →</Link>
+        </div>
+        <div className="table-responsive">
+          <table className="complaints-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Complaint ID</th>
+                <th>Issue / Description</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>CMP-2026-0012</td>
+                <td>
+                  <strong>Streetlight not working</strong>
+                  <p>Streetlight at Ward 3 has not been working since last week.</p>
+                </td>
+                <td>12 Oct 2026</td>
+                <td><span className="status-badge resolved">● Resolved</span></td>
+                <td><Link to="/home/complaints/1" className="action-btn"><Eye size={14} /> View</Link></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>CMP-2026-0011</td>
+                <td>
+                  <strong>Water supply issue</strong>
+                  <p>Low water pressure in Ward 2 area.</p>
+                </td>
+                <td>10 Oct 2026</td>
+                <td><span className="status-badge progress">● In Progress</span></td>
+                <td><Link to="/home/complaints/2" className="action-btn"><Eye size={14} /> View</Link></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>CMP-2026-0010</td>
+                <td>
+                  <strong>Garbage collection delay</strong>
+                  <p>Garbage has not been collected for 3 days.</p>
+                </td>
+                <td>08 Oct 2026</td>
+                <td><span className="status-badge pending">● Pending</span></td>
+                <td><Link to="/home/complaints/3" className="action-btn"><Eye size={14} /> View</Link></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
+

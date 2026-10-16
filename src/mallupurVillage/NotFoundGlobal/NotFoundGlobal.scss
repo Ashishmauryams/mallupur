@@ -6,7 +6,7 @@
     justify-content: center;
     padding: 40px;
     box-sizing: border-box;
-    background: var(--primaryBg-color);
+    background: var(--bg-secondary);
     overflow: hidden;
 
     &__wrapper {
@@ -106,7 +106,7 @@
         border: 1px solid var(--primary-color);
 
         background: var(--primary-color);
-        color: #ffffff;
+        color: var(--bg-primary);
 
         &:hover {
             background: var(--button-hover-color, #238548);
@@ -116,7 +116,7 @@
     &__button--secondary {
         border: 1px solid var(--border-color, #dfe4e8);
 
-        background: var(--primaryBg-color);
+        background: var(--bg-secondary);
         color: var(--text-primary);
 
         &:hover {
@@ -203,7 +203,7 @@
 
         border-radius: 50%;
 
-        background: var(--primaryBg-color);
+        background: var(--bg-secondary);
     }
 
     // =========================

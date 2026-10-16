@@ -66,7 +66,7 @@ const UserDetails = () => {
                             <ArrowLeft size={18} />
                             <span>Back to Users</span>
                         </button> */}
-                        <BackButton path={"/services/users"}/>
+                        <BackButton path={"/users"}/>
 
                         <div className="user-details__actions">
 

@@ -56,6 +56,7 @@ body {
     --bg-primary: #ffffff;
     --bg-secondary: #f8faf8;
     --bg-tertiary: #edf7ef;
+    --bg-four: #f7f9fc;
 
 
     --border: #d9dee7;
@@ -87,7 +88,63 @@ body {
 
     --contact-border: var(--border-color, #e5e7eb);
 
+    --banner-overlay: linear-gradient(to right,
+            rgba(255, 255, 255, 0.95) 20%,
+            rgba(255, 255, 255, 0.4) 60%,
+            transparent 100%);
+
+
 }
+
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+    --primary: #2ecc71;
+    --primary-hover: #27ae60;
+    --primary-light: rgba(46, 204, 113, 0.15);
+    --primary-soft: rgba(46, 204, 113, 0.08);
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --bg-primary: #0f172a;
+    /* Deep dark background */
+    --bg-secondary: #1e293b;
+    /* Slightly lighter card/sidebar bg */
+    --bg-tertiary: #132f20;
+    --bg-four: #0f172a;
+
+    --border: #334155;
+    --border-primary: #2ecc71;
+    --border-focus: #2ecc71;
+
+    --input-bg: #1e293b;
+    --input-border: #334155;
+    --input-border-focus: #2ecc71;
+    --input-focus-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+
+    --button-bg: #2ecc71;
+    --button-hover: #27ae60;
+    --button-text: #0f172a;
+    --button-border: #27ae60;
+    --button-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+
+    --success: #2ecc71;
+    --error: #ef4444;
+    --warning: #f59e0b;
+
+    --gradient-one: #27ae60;
+    --gradient-two: #2ecc71;
+    --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    --contact-border: #334155;
+
+    --banner-overlay: linear-gradient(to right,
+            rgba(18, 18, 18, 0.95) 20%,
+            rgba(18, 18, 18, 0.5) 60%,
+            rgba(18, 18, 18, 0.15) 100%);
+}
+
 
 .container {
     width: 100%;
@@ -123,5 +180,11 @@ body {
 .center {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.center_1 {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }

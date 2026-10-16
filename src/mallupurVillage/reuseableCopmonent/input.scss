@@ -8,7 +8,7 @@
         font-size: 14px;
         font-weight: 600;
 
-        color: #293247;
+        color: var(--text-primary);
     }
 
     .required-star {
@@ -26,6 +26,8 @@
     height: 60px;
 
     padding: 0 14px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
 
     box-sizing: border-box;
 
@@ -39,11 +41,11 @@
     transition: 0.3s;
 
     &::placeholder {
-        color: #9ca3af;
+        color: var(--text-secondary);
     }
 
     &:focus {
-        border-color: #299456;
+        border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(41, 148, 86, 0.1);
     }
 

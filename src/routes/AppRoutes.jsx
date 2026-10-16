@@ -6,15 +6,15 @@ import { useAuth } from "../contextApi/AuthContext.jsx";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
 import Loading from "../mallupurVillage/loader/Loading.jsx";
 
+
 // Lazy loaded pages
+const Dashboard = lazy(() => import('../mallupurVillage/Dashboard/Dashboard.jsx'));
 const Front = lazy(() => import("../mallupurVillage/fontPage/Front"));
 const Login = lazy(() => import("../mallupurVillage/loginsign/Login"));
 const AppLayout = lazy(() => import("../mallupurVillage/layout/AppLayout"));
-const Dashboard = lazy(() => import("../mallupurVillage/dashboard/Dashboard"));
 const AboutVillage = lazy(() => import("../mallupurVillage/about/AboutVillage"));
 const Complaint = lazy(() => import('../mallupurVillage/complaint/Complaint.jsx'));
 const Contact = lazy(() => import('../mallupurVillage/contact/Contact.jsx'));
-const UserDashboard = lazy(() => import('../mallupurVillage/userDashboard/UserDashboard.jsx'));
 const RegisterComplaint = lazy(() => import('../mallupurVillage/complaint/RegisterComplaint/RegisterComplaint.jsx'));
 const ComplaintList = lazy(() => import('../mallupurVillage/complaint/complaintList/ComplaintList.jsx'));
 const ComplaintDetails = lazy(() => import('../mallupurVillage/complaint/ComplaintDetails/ComplaintDetail.jsx'));
@@ -49,7 +49,7 @@ const AppRoutes = () => {
                     {/* Protected Routes */}
                     <Route element={<ProtectedRoute />}>
                         <Route element={<AppLayout />}>
-                            <Route path="/home" element={role === "ADMIN" ? <Dashboard /> : <UserDashboard />} />
+                            <Route path="/home" element={<Dashboard />} />
                             <Route path="/services/complaint" element={<Complaint />} />
                             <Route path="/services/complaint/create" element={<RegisterComplaint />} />
                             <Route path="/services/complaint/my" element={<ComplaintList />} />
@@ -57,14 +57,14 @@ const AppRoutes = () => {
                             <Route path="/home/profile" element={<Profile />} />
                             <Route path="/home/profile/edit" element={<EditProfile />} />
 
-                            <Route path="/project/create" element={<CreateVillageProject />} />
+                            <Route path="/project/create" element={role === "ADMIN" && <CreateVillageProject />} />
                             <Route path="/project" element={<VillageProjects />} />
-                            <Route path="/projects/all" element={<VillageProjectList />} />
+                            <Route path="/project/all" element={<VillageProjectList />} />
                             <Route path="/project/Details/:id" element={<VillageProjectDetails />} />
-                            <Route path="/project/edit/:id" element={<CreateVillageProject />} />
+                            <Route path="/project/edit/:id" element={role === "ADMIN" && <CreateVillageProject />} />
 
-                            <Route path="/services/users" element={role === "ADMIN" && <UserList />} />
-                            <Route path="/user/details/:id" element={role === "ADMIN" && <UserDetails />} />
+                            <Route path="/users" element={role === "ADMIN" && <UserList />} />
+                            <Route path="/users/details/:id" element={role === "ADMIN" && <UserDetails />} />
 
 
                             <Route path="/schemes/links" element={<ImpLink />} />

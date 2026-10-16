@@ -171,7 +171,7 @@ const CreateVillageProject = () => {
                     severity: "success",
                     variant: "filled",
                 });
-                navigate("/projects/all");
+                navigate("/project/all");
             }
         } catch (err) {
             showAlert({

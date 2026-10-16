@@ -8,7 +8,7 @@
 
     font-size: 14px;
     font-weight: 600;
-    color: #293247;
+    color: var(--text-primary);
 
     span {
       color: #dc2626;
@@ -25,9 +25,9 @@
     font-family: inherit;
     font-size: 14px;
     line-height: 1.5;
-    color: #1f2937;
+    color: var(--text-primary);
 
-    background: #ffffff;
+    background: var(--bg-primary);
 
     border: 1px solid #d9dee7;
     border-radius: 9px;
@@ -41,7 +41,7 @@
   }
 
   textarea::placeholder {
-    color: #9ca3af;
+    color: var(--text-secondary);
   }
 
   textarea:focus {

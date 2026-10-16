@@ -1,7 +1,7 @@
 .complaint-page {
     min-height: calc(100vh - 140px);
-    padding: 50px 20px 60px;
-    background: #f7f9fc;
+    // padding: 50px 20px 60px;
+    background: var(--bg-four);
 
     .complaint-header {
         margin-bottom: 30px;
@@ -28,13 +28,13 @@
 
             font-size: 24px;
             font-weight: 700;
-            color: #172033;
+            color: var(--text-primary);
         }
 
         p {
             font-size: 14px;
             line-height: 1.5;
-            color: #6b7280;
+            color: var(--text-secondary);
         }
     }
 

@@ -7,7 +7,7 @@
   .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 24px;
+    padding: 30px 24px;
 
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
@@ -50,7 +50,7 @@
     h3 {
       color: #ffffff;
       font-size: 17px;
-      margin: 0 0 20px;
+      margin: 0 0 15px;
       font-weight: 600;
     }
 
@@ -60,7 +60,7 @@
       margin: 0;
 
       li {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
 
         a {
           color: #9ca3af;
@@ -145,7 +145,7 @@
     .footer-bottom-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px 24px;
+      padding: 10px 24px;
 
       display: flex;
       align-items: center;

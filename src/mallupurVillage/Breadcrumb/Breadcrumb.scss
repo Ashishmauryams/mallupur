@@ -1,0 +1,85 @@
+
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; // Mobile par overflow handle karne ke liye
+    overflow-x: auto; // Chote screens par horizontal scroll support
+    white-space: nowrap;
+    gap: 6px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    scrollbar-width: none; // Firefox scrollbar hide
+
+    &::-webkit-scrollbar {
+        display: none; // Chrome/Safari scrollbar hide
+    }
+
+    &-home,
+    &-link,
+    &-current {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-primary);
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        svg {
+            color: inherit;
+            opacity: 0.85;
+            flex-shrink: 0;
+        }
+    }
+
+    &-home {
+        color: var(--text-secondary);
+
+        &:hover {
+            color: var(--primary);
+        }
+    }
+
+    &-link {
+        color: var(--text-secondary);
+
+        &:hover {
+            color: var(--primary);
+        }
+    }
+
+    &-current {
+        color: var(--text-primary);
+        font-weight: 600;
+
+        svg {
+            color: var(--primary);
+        }
+    }
+
+    &-separator {
+        color: var(--text-muted);
+        opacity: 0.5;
+        flex-shrink: 0;
+    }
+
+    &-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    // Media Query for Tablets and Desktops
+    @media (min-width: 768px) {
+        flex-wrap: wrap; // Bade screens par items wrap ho jayenge
+        overflow-x: visible;
+        padding: 12px 18px;
+        gap: 8px;
+
+        &-item {
+            gap: 8px;
+        }
+    }
+}

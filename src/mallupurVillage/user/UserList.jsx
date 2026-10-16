@@ -150,7 +150,7 @@ const UserList = () => {
     };
 
     const handleView = (id) => {
-        navigate(`/user/details/${id}`);
+        navigate(`/users/details/${id}`);
     };
 
 
@@ -170,7 +170,7 @@ const UserList = () => {
                 onClear={handleClear}
                 loading={loading}
                 deleteLoading={deleteLoading}
-                pageSize={10}
+                pageSize={5}
                 showPagination={true}
                 emptyMessage="No users found"
             />
