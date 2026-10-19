@@ -6,7 +6,7 @@ import ThemeToggleBtn from '../themes/ThemeToggle';
 
 const AppHeader = ({ toggleSidebar, mobileOpen }) => {
 
-    const {user, role} = useAuth();
+    const { user, role } = useAuth();
 
     return (
 
@@ -44,8 +44,8 @@ const AppHeader = ({ toggleSidebar, mobileOpen }) => {
                         <p>{user?.role}</p>
                     </div>
                 </div>
-                <div><ChevronDown /></div>
-                <ThemeToggleBtn/>
+                <div><ChevronDown color='var(--text-secondary)' /></div>
+                <ThemeToggleBtn />
             </div>
         </header>
 

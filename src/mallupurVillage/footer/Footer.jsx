@@ -51,7 +51,7 @@ const Footer = () => {
           <h3>Quick Links</h3>
 
           <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="/home">Home</a></li>
             <li><a href="/about">About Village</a></li>
             <li><a href="/events">Events</a></li>
             <li><a href="/gallery">Gallery</a></li>
@@ -67,7 +67,7 @@ const Footer = () => {
             <li><a href="/members">Village Members</a></li>
             <li><a href="/committee">Village Committee</a></li>
             <li><a href="/notices">Notices</a></li>
-            <li><a href="/complaints">Complaints</a></li>
+            <li><a href="/services/complaint">Complaints</a></li>
             <li><a href="/contact">Contact Us</a></li>
           </ul>
         </div>

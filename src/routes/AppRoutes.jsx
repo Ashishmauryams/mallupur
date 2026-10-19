@@ -7,8 +7,8 @@ import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
 import Loading from "../mallupurVillage/loader/Loading.jsx";
 
 
+
 // Lazy loaded pages
-const Dashboard = lazy(() => import('../mallupurVillage/Dashboard/Dashboard.jsx'));
 const Front = lazy(() => import("../mallupurVillage/fontPage/Front"));
 const Login = lazy(() => import("../mallupurVillage/loginsign/Login"));
 const AppLayout = lazy(() => import("../mallupurVillage/layout/AppLayout"));
@@ -29,6 +29,7 @@ const UserList = lazy(() => import('../mallupurVillage/user/UserList.jsx'));
 const UserDetails = lazy(() => import('../mallupurVillage/user/UserDetail/UserDetails.jsx'));
 const NotFoundGlobal = lazy(() => import('../mallupurVillage/NotFoundGlobal/NotFoundGlobal.jsx'));
 const ImpLink = lazy(() => import('../mallupurVillage/importantLink/ImpLink.jsx'));
+const Dashboard = lazy(()=>import('../mallupurVillage/dashboard/Dashboard.jsx'))
 
 
 const AppRoutes = () => {

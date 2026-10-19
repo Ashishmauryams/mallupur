@@ -15,7 +15,7 @@ const ComplaintList = () => {
     const navigate = useNavigate();
 
     const [complaints, setComplaints] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {

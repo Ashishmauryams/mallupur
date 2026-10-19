@@ -20,8 +20,8 @@ import {
 import "./Dashboard.scss";
 import { getUserProfile } from "../../api/apiService";
 import { useAuth } from "../../contextApi/AuthContext";
-import Loader from "../reuseableCopmonent/loader/Loader";
 import Loading from "../loader/Loading";
+import UserComplaint from "./userComplaintTable/userComplaint";
 
 const Dashboard = () => {
 
@@ -58,7 +58,7 @@ const Dashboard = () => {
       <section className="dashboard-hero">
         <div className="dashboard-hero__text">
           <span className="dashboard-hero__greeting">Good Morning ☀️</span>
-          <h1>Welcome back, <span>Sangam!</span></h1>
+          <h1>Welcome back, <span>{user?.fullName}!</span></h1>
           <p>Let's build a better Mallupur together. Manage your complaints, explore government schemes and stay updated with village development.</p>
         </div>
         <div className="dashboard-hero__date-badge">
@@ -272,10 +272,10 @@ const Dashboard = () => {
       </div>
 
       {/* 4. Recent Complaints Table */}
-      <div className="dashboard-card complaints-card">
+      {/* <div className="dashboard-card complaints-card">
         <div className="card-header">
           <h3>Recent Complaints</h3>
-          <Link to="/home/complaints" className="view-all">View all →</Link>
+          <Link to="/services/complaint/my" className="view-all">View all →</Link>
         </div>
         <div className="table-responsive">
           <table className="complaints-table">
@@ -326,7 +326,9 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
+
+      <UserComplaint/>
     </div>
   );
 };
