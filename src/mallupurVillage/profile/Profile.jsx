@@ -1,8 +1,6 @@
 
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-    User,
     Mail,
     Phone,
     MapPin,
@@ -11,46 +9,22 @@ import {
 } from "lucide-react";
 import "./Profile.scss";
 import BackButton from "../reuseableCopmonent/BackButton/BackButton";
-import { getUserProfile } from "../../api/apiService";
 import NotFound from "../reuseableCopmonent/notFound/NotFound";
 import Loading from "../loader/Loading";
 import ErrorMessage from "../reuseableCopmonent/errorMessage/ErrorMessage";
+import { useUser } from "../../contextApi/UserContext";
 
 const Profile = () => {
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
-    const [error, setError] = useState(false);
 
-    useEffect(() => {
-        fetchUsersProfile();
-    }, []);
 
-    const fetchUsersProfile = async () => {
-        try {
-            setLoading(true);
-            setError(false);
-            const resp = await getUserProfile();
-            if (resp?.status === 200 && resp?.data) {
-                setUser(resp?.data);
-            } else {
-                setUser(null);
-            }
-
-        } catch (err) {
-            console.log("err----", err);
-            setError(true);
-            setUser(null);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const { userProfile, loading, error, renderImageSource } = useUser()
 
     return (
         <div className="profile-page">
 
             {loading ? (<Loading borderColor="#000" />) :
                 error ? (<ErrorMessage />) :
-                    user ?
+                    userProfile ?
                         (<div className="container">
 
                             <div className="profile-page__header">
@@ -64,7 +38,7 @@ const Profile = () => {
                                         View your personal information and account details.
                                     </p>
                                 </div>
-                                <BackButton path="/home"/>
+                                <BackButton path="/home" />
                             </div>
 
                             <div className="profile-page__card">
@@ -74,8 +48,8 @@ const Profile = () => {
                                     <div className="profile-page__profile-top">
                                         <div className="profile-page__avatar-wrapper">
                                             <img
-                                                src={user?.avatar || "/images/avatar.jpg"}
-                                                alt={user?.fullName}
+                                                src={renderImageSource()}
+                                                alt={userProfile?.fullName}
                                                 className="profile-page__avatar"
                                             />
 
@@ -83,20 +57,19 @@ const Profile = () => {
                                         </div>
 
                                         <div className="profile-page__identity">
-                                            <h2>{user?.fullName}</h2>
+                                            <h2>{userProfile?.fullName}</h2>
 
                                             <p>
-                                                @{user?.username}
+                                                @{userProfile?.username}
                                             </p>
 
                                             <span className="profile-page__role">
-                                                {user?.role}
+                                                {userProfile?.role}
                                             </span>
                                         </div>
                                     </div>
                                     <Link
                                         to="/home/profile/edit"
-                                        state={{user}}
                                         className="profile-page__edit-btn"
                                     >
                                         <Edit3 size={18} />
@@ -124,7 +97,7 @@ const Profile = () => {
 
                                             <div>
                                                 <span>Email Address</span>
-                                                <p>{user?.email}</p>
+                                                <p>{userProfile?.email}</p>
                                             </div>
                                         </div>
 
@@ -136,7 +109,7 @@ const Profile = () => {
 
                                             <div>
                                                 <span>Phone Number</span>
-                                                <p>{user?.phone}</p>
+                                                <p>{userProfile?.phone}</p>
                                             </div>
                                         </div>
 
@@ -148,7 +121,7 @@ const Profile = () => {
 
                                             <div>
                                                 <span>Village</span>
-                                                <p>{user?.village || "Mallupur"}</p>
+                                                <p>{userProfile?.village || "Mallupur"}</p>
                                             </div>
                                         </div>
 
@@ -160,7 +133,7 @@ const Profile = () => {
 
                                             <div>
                                                 <span>Member Since</span>
-                                                <p>{user?.createAt}</p>
+                                                <p>{userProfile?.createAt}</p>
                                             </div>
                                         </div>
 
@@ -177,12 +150,12 @@ const Profile = () => {
                                     <div className="profile-page__account-row">
                                         <div>
                                             <span>Username</span>
-                                            <p>{user?.username}</p>
+                                            <p>{userProfile?.username}</p>
                                         </div>
 
                                         <div>
                                             <span>Account Type</span>
-                                            <p>{user?.role}</p>
+                                            <p>{userProfile?.role}</p>
                                         </div>
                                     </div>
 

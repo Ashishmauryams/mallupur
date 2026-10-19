@@ -22,33 +22,14 @@ import { getUserProfile } from "../../api/apiService";
 import { useAuth } from "../../contextApi/AuthContext";
 import Loading from "../loader/Loading";
 import UserComplaint from "./userComplaintTable/userComplaint";
+import { useUser } from "../../contextApi/UserContext";
 
 const Dashboard = () => {
 
-  const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState({});
-
 
   const { user } = useAuth();
+  const { userProfile, renderImageSource, loading } = useUser()
 
-  useEffect(() => {
-    fetchUsersProfile();
-  }, []);
-
-  const fetchUsersProfile = async () => {
-    try {
-      setLoading(true);
-      const resp = await getUserProfile();
-      if (resp?.status === 200 && resp?.data) {
-        setUserData(resp?.data);
-      }
-
-    } catch (err) {
-      console.log("err----", err);
-    } finally {
-      setLoading(false);
-    }
-  }
 
 
 
@@ -127,51 +108,51 @@ const Dashboard = () => {
       {/* 3. Middle Section: Profile, Activity, News */}
       <div className="dashboard-grid-middle">
         {/* My Profile Card */}
-      {loading ? <Loading borderColor="#000000" height="50%"/> : 
-        <div className="dashboard-card profile-card">
-          <div className="card-header">
-            <h3>My Profile</h3>
-            <Link to="/home/profile/edit" className="edit-btn">
-              <Pencil size={14} /> Edit Profile
-            </Link>
-          </div>
-          <div className="profile-user-info">
-            <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80"
-              alt="Sangam"
-              className="profile-avatar"
-            />
-            <div>
-              <h4>{userData?.fullName}</h4>
-              <span className="badge-verified">Verified Citizen</span>
-              <p className="user-role">{userData?.role}</p>
+        {loading ? <Loading borderColor="#000000" height="50%" /> :
+          <div className="dashboard-card profile-card">
+            <div className="card-header">
+              <h3>My Profile</h3>
+              <Link to="/home/profile/edit" className="edit-btn">
+                <Pencil size={14} /> Edit Profile
+              </Link>
             </div>
-          </div>
-          <div className="profile-contact-list">
-            <div className="contact-item">
-              <Mail size={16} />
+            <div className="profile-user-info">
+              <img
+                src={renderImageSource()}
+                alt="Sangam"
+                className="profile-avatar"
+              />
               <div>
-                <span className="label">Email Address</span>
-                <strong>{userData?.email}</strong>
+                <h4>{userProfile?.fullName}</h4>
+                <span className="badge-verified">Verified Citizen</span>
+                <p className="user-role">{userProfile?.role}</p>
               </div>
             </div>
-            <div className="contact-item">
-              <Phone size={16} />
-              <div>
-                <span className="label">Mobile Number</span>
-                <strong>{userData?.phone}</strong>
+            <div className="profile-contact-list">
+              <div className="contact-item">
+                <Mail size={16} />
+                <div>
+                  <span className="label">Email Address</span>
+                  <strong>{userProfile?.email}</strong>
+                </div>
               </div>
-            </div>
-            <div className="contact-item">
-              <MapPin size={16} />
-              <div>
-                <span className="label">Village</span>
-                <strong>Mallupur Village</strong>
+              <div className="contact-item">
+                <Phone size={16} />
+                <div>
+                  <span className="label">Mobile Number</span>
+                  <strong>{userProfile?.phone}</strong>
+                </div>
+              </div>
+              <div className="contact-item">
+                <MapPin size={16} />
+                <div>
+                  <span className="label">Village</span>
+                  <strong>Mallupur Village</strong>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      }
+        }
 
         {/* My Activity Overview */}
         <div className="dashboard-card activity-card">
@@ -328,7 +309,7 @@ const Dashboard = () => {
         </div>
       </div> */}
 
-      <UserComplaint/>
+      <UserComplaint />
     </div>
   );
 };

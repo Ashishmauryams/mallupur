@@ -73,6 +73,7 @@ export const AuthProvider = ({ children }) => {
 
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        window.location.href = "/login";
     };
 
     const isAuthenticated = Boolean(token);

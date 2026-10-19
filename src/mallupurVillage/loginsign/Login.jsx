@@ -23,6 +23,7 @@ import { useAuth } from "../../contextApi/AuthContext";
 import { loginUser } from "../../api/apiService";
 import Register from "./Register";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
+import { useUser } from "../../contextApi/UserContext";
 
 
 const validationRules = {
@@ -62,6 +63,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { showAlert } = useAlert();
     const { login } = useAuth();
+    const { refreshUser } = useUser();
 
 
     const handleChange = (e) => {
@@ -104,6 +106,7 @@ const Login = () => {
                     severity: "success",
                     variant: "filled",
                 });
+                refreshUser();
                 navigate("/home", { replace: true });
 
             }

@@ -3,10 +3,15 @@ import './style/appHeader.scss';
 import { useAuth } from "../../contextApi/AuthContext";
 import { Bell, ChevronDown, Menu, X } from 'lucide-react';
 import ThemeToggleBtn from '../themes/ThemeToggle';
+import { useUser } from '../../contextApi/UserContext';
+import Loader from '../reuseableCopmonent/loader/Loader';
 
 const AppHeader = ({ toggleSidebar, mobileOpen }) => {
 
-    const { user, role } = useAuth();
+    const { user } = useAuth();
+    const { renderImageSource , loading} = useUser();
+
+
 
     return (
 
@@ -38,7 +43,7 @@ const AppHeader = ({ toggleSidebar, mobileOpen }) => {
                     <span className="count">+3</span>
                 </div>
                 <div className="center_1">
-                    <img src="/images/avatar.jpg" alt="image" />
+                    {loading ? <Loader /> : <img src={renderImageSource()} alt="image" />}
                     <div className="user">
                         <h6>{user?.fullName}</h6>
                         <p>{user?.role}</p>
